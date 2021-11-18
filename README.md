@@ -1,64 +1,15 @@
-This is a template for the EDAV final project. It is based on the template created with *File, New Project..., New Directory, Book Project using bookdown* in RStudio. 
+We are living in an era of rapid socio-economic and political changes, most noted for the isolationist trend spearheaded by the Trump Administration, the spread of the pandemic of the coronavirus, and the new establishment of the fundamentalist Taliban government. The developing world is facing more challenges and threats than ever and the developing countries' needs for aids should only grow stronger. Thus, it is of great interest to investigate the evolution of the US assistance over time, so we can dissect the pattern of the aids provided to different entities and ultimately, motivate leaders and policymakers to make informed decisions regarding the future prospect of foreign assistance. To achieve this goal, we will use a dataset made publicly available that compiles the multi-dimensional information of the foreign assistance portfolio of the US government, spanning from 1946 to 2022 fiscal year.
 
+Some of the research questions we intend to explore are listed as follows:
 
-## ABSOLUTE ESSENTIALS
+• What categories did the US aids consistently devote the most resources to?
 
-*If you have any difficulties or have feedback of any kind, please file an issue.*
+• What countries were the biggest beneficiaries of the US foreign assistance?
 
-### Copy this template
+• Did the recent growth and development of the private sector investments, NGOs, and other new sectors impact the role of the bilateral and multilateral organizations (e.g. USAID, World Bank, etc.) in providing aids?
 
-- [ ] 1. Click the green "Use this template" button above.  DO NOT FORK THE REPO. Choose a descriptive name for your repo, such as "federalbudget" or "AIDSdeaths".  (If you change your mind before you do any work, delete your new repo and start over.)
+• Did the overall time frame of the programs change? Has the duration of the program activities become longer or shorter?
 
-- [ ] 2. In the Description field, write: "Bookdown source files for EDAV final project".
+• Are there noticeable relationships between the fields?
 
-### Set up GitHub Pages	
-- [ ] 1. On the home page of your repo, click Settings. Scroll down to the GitHub pages section and change **Source** from **None** to **main**, change **/ (root)** to **/docs** folder, and click Save. Above the **Source** line, a bar will appear with your book's URL. The bar will initially be blue and indicate that your book is *ready* to be published and will change to green once it is published. Copy the URL. (Note that sometimes there is a delay until your book actually appears at that URL. If it doesn't appear after a few minutes, make a change and commit it to trigger a GitHub Pages build.)	
-
-- [ ] 2. Click the gear button near "About" on the home page of the repo and paste your book URL into the **Website** field that appears on the right.
-
-### Clone the repo
-
-- [ ] 1. Clone your new repo with *File, New Project..., Version Control, Git* in RStudio.
-
-### Edit some key files
-
-- [ ] 1. In `index.Rmd`, change YOUR TITLE HERE to your title.
-
-- [ ] 2. In `index.Rmd`, change YOUR NAMES HERE to your names.
-
-- [ ] 3. In `_bookdown.yml`, change YOUR GITHUB USERNAME to your GitHub username in the two places it appears.
-
-- [ ] 4. In `_bookdown.yml`, change YOUR GITHUB REPO to your GitHub repo name in the two places it appears.
-
-(Note that 3. and 4. provide links to the `.Rmd` files of your project for editing and viewing. If you move your `.Rmd` files you will need to update these file paths. Once your book is rendered, test that the edit (pen) and view (eye) buttons work.)
-
-- [ ] 5. In `_output.yml`, change YOUR SHORT TITLE to a shortened version of your title. (Leave the "after:" line indicating that the book was published with bookdown as is.)
-
-### Render the book
-
-- [ ] 1. Install **bookdown** with `install.packages("bookdown")`. If you already have it, update to the most recent version.
-
-- [ ] 2. Render locally with `bookdown::render_book("index.Rmd")` or clicking the *Build book* button which should appear in the Build tab (in the same pane as Environment, History, Connections, ...).
-
-- [ ] 3. Use `browseURL("docs/index.html")` to view your book locally (or just open `index.html` in a browser).
-
-- [ ] 4. If it looks good, commit and push all changed files to GitHub. 
-
-(You will need to repeat steps 2 and 4 every time you wish to update the book online.)
-
-### Edit README	
-
-Once you've completed these steps, delete the content of this **README** and add a short description of your project with a link to the book URL. It would be appreciated if you add the following to the end:	
-
-*This repo was initially generated from a bookdown template available here: https://github.com/jtr13/EDAVtemplate.*	
-
-### Demo Video	
-
-A demo video showing how to create a **bookdown book** following these similar instructions: http://bit.ly/fiveminutebookdown Note that this video uses a different template.
-
-### Additional features	
-
-Please consult the official guide to **bookdown**: https://bookdown.org/yihui/bookdown
-
-
-
+• How did the major economic shocks (e.g. subprime mortgage crisis in 2008 and the current pandemic of COVID-19) affect the pattern of the US foreign aids provided to the developing countries?
