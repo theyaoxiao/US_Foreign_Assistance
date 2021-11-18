@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAMES HERE"
+title: "Visualizing US Foreign Assistance Projects"
+author: "Tianmai Jiao, Yao Xiao"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
