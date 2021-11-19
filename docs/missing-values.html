@@ -101,6 +101,66 @@
             <section class="normal" id="section-">
 <div id="missing-values" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
+<p>The dataset has a total of 365,0000 rows and 16 features of interest. As is summarized in Table 4.1 which computes the number of missing values for each variable, we see that data are missing only in two specific fields: <code>Activity.Start.Date</code> and <code>Activity.End.Date</code>. These two refer to the start and end dates of different US foreign aids program activities. These may cause issues that hinder our understanding of the chronology of the data. For example, with a majority of the dataset missing these two variables, it may be hard to generalize an overall pattern of the duration of the program activities. However, since none of the <code>year</code> column contains missing data, we can still surmise the approximate time frame of each activity implemented.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-7">Table 4.1: </span>Number of Rows Missing by Variable</caption>
+<thead>
+<tr class="header">
+<th align="left">variable_name</th>
+<th align="left">NA_rows_count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Activity.End.Date</td>
+<td align="left">302423</td>
+</tr>
+<tr class="even">
+<td align="left">Activity.Start.Date</td>
+<td align="left">282800</td>
+</tr>
+</tbody>
+</table>
+<p>Also, we can take a closer look at the missingness pattern and observe for which combination of attributes, missing data are the most common. According to the results outlined in Table 4.2, observations that are missing both <code>Activity.Start.Date</code> and <code>Activity.End.Date</code> are the most dominant. Observations that do not have data for either <code>Activity.Start.Date</code> or <code>Activity.End.Date</code> come second. Noticeably, observations with data on <code>Activity.Start.Date</code> are significantly more than those with data on <code>Activity.End.Date</code>. This may indicate that the US government implements their foreign aid program activities that often do not have a designated end date.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-8">Table 4.2: </span>Number of Rows with a Specified Missing Pattern</caption>
+<thead>
+<tr class="header">
+<th align="left">Activity.Start.Date</th>
+<th align="left">Activity.End.Date</th>
+<th align="left">Other.Variables</th>
+<th align="left">NA_rows_count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">279546</td>
+</tr>
+<tr class="even">
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">59323</td>
+</tr>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">22877</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">3254</td>
+</tr>
+</tbody>
+</table>
+<p>To visualize the missingness pattern in juxtaposition with the number of missing rows for each column already mentioned and interpreted from the above summary tables, the following graph provides further details on the proportion of rows that are missing. We observe that around 80% of the data contain missing values for one or both of <code>Activity.Start.Date</code> and <code>Activity.End.Date</code>. More specifically, rows contain missing values for both of <code>Activity.Start.Date</code> and <code>Activity.End.Date</code> account for 76.6% of the dataset, and rows that have no missing values account for 16.3% of the dataset. 6.3% of data are rows that do not have values for <code>Activity.End.Date</code>, and 0.9% of data do not have values for <code>Activity.Start.Date</code>.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 
 </div>
             </section>

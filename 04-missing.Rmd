@@ -1,1 +1,161 @@
 # Missing values
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r, echo=FALSE}
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+library(patchwork)
+library(ggnewscale)
+```
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+us_foreign_aid_sample <- read.csv("./data/us_foreign_aid_sample.csv")
+us_foreign_aid_sample$X <- NULL
+```
+
+The dataset has a total of 365,0000 rows and 16 features of interest. As is summarized in Table 4.1 which computes the number of missing values for each variable, we see that data are missing only in two specific fields: `Activity.Start.Date` and  `Activity.End.Date`. These two refer to the start and end dates of different US foreign aids program activities. These may cause issues that hinder our understanding of the chronology of the data. For example, with a majority of the dataset missing these two variables, it may be hard to generalize an overall pattern of the duration of the program activities. However, since none of the `year` column contains missing data, we can still surmise the approximate time frame of each activity implemented. 
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+na_count_by_variable <- as.data.frame(colSums(is.na(us_foreign_aid_sample)))
+na_count_by_variable <- na_count_by_variable %>%
+  rownames_to_column("variable_name") %>%
+  rename(NA_rows_count = "colSums(is.na(us_foreign_aid_sample))") %>%
+  arrange(desc(NA_rows_count)) %>%
+  top_n(NA_rows_count, 2)
+
+kable(na_count_by_variable, 
+      caption = "Number of Rows Missing by Variable",
+      align = "l", table.attr = "style='width:30%;'" )
+```
+Also, we can take a closer look at the missingness pattern and observe for which combination of attributes, missing data are the most common. According to the results outlined in Table 4.2, observations that are missing both `Activity.Start.Date` and `Activity.End.Date` are the most dominant. Observations that do not have data for either `Activity.Start.Date` or `Activity.End.Date` come second. Noticeably, observations with data on `Activity.Start.Date` are significantly more than those with data on `Activity.End.Date`. This may indicate that the US government implements their foreign aid program activities that often do not have a designated end date.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
+missing_patterns <- data.frame(is.na(us_foreign_aid_sample)) %>%
+  group_by_all() %>%
+  count(name = "count", sort = TRUE) %>%
+  ungroup()
+
+summarized_missing_patterns <- missing_patterns[,c("Activity.Start.Date", "Activity.End.Date", "count")]
+summarized_missing_patterns$Other.Variables <- rep(FALSE, 4)
+summarized_missing_patterns <- summarized_missing_patterns %>%
+  rename(NA_rows_count = "count") %>%
+  relocate(NA_rows_count, .after = Other.Variables) %>%
+  arrange(desc(NA_rows_count))
+
+kable(summarized_missing_patterns, 
+      caption = "Number of Rows with a Specified Missing Pattern",
+      align = "l", table.attr = "style='width:30%;'")
+```
+
+To visualize the missingness pattern in juxtaposition with the number of missing rows for each column already mentioned and interpreted from the above summary tables, the following graph provides further details on the proportion of rows that are missing. We observe that around 80% of the data contain missing values for one or both of `Activity.Start.Date` and `Activity.End.Date`. More specifically, rows contain missing values for both of `Activity.Start.Date` and `Activity.End.Date` account for 76.6% of the dataset, and rows that have no missing values account for 16.3% of the dataset. 6.3% of data are rows that do not have values for `Activity.End.Date`, and 0.9% of data do not have values for `Activity.Start.Date`.
+
+```{r,  echo = FALSE, message=FALSE, warning=FALSE}
+plot_missing <- function(df, percent = TRUE){
+
+missing_patterns <- data.frame(is.na(df)) %>%
+  group_by_all() %>%
+  count(name = "count", sort = TRUE) %>%
+  ungroup()
+
+missing_values = df %>%
+    rownames_to_column("id")%>%
+    gather(key,value,-id) %>%
+    mutate(missing = ifelse(is.na(value),1,0)) %>%
+    group_by(key) %>%
+    summarise(count = sum(missing)) %>%
+    arrange(desc(count)) %>% 
+    mutate(percentage = count/nrow(df) * 100)
+
+if (max(missing_values$count) < 5){
+  missing_var_pattern = ggplot(missing_values, aes(x=fct_reorder(key, -count), y=count)) + 
+  geom_col(fill="lightblue") + 
+  xlab("") + 
+  ylab("num rows missing:") + 
+  ylim(0, 4) +
+  ggtitle("Missing value patterns")  +
+  theme_bw() + 
+    theme(axis.text.x = element_text(angle = 30, hjust=1),
+          text = element_text(size = 6))
+  
+} else {
+  missing_var_pattern = ggplot(missing_values, aes(x=fct_reorder(key, -count), y=count)) + 
+  geom_col(fill="lightblue") + 
+  xlab("") + 
+  ylab("num rows missing:") + 
+  ylim(as.integer(min(missing_values$count)), as.integer(max(missing_values$count))+1) +
+  ggtitle("Missing value patterns")  +
+  theme_bw() + 
+    theme(axis.text.x = element_text(angle = 30, hjust=1),
+          text = element_text(size = 6))
+}
+
+missing_var_pattern_percentage = ggplot(missing_values, aes(x=fct_reorder(key, -count), y=percentage)) + geom_col(fill="lightblue") + 
+  xlab("") + 
+  ylab("% rows missing:") + 
+  ylim(0, 100) + 
+  ggtitle("Missing value patterns")  +
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 30, hjust=1), 
+        text = element_text(size = 6))
+
+df1 = missing_patterns[-length(missing_patterns)]%>% 
+  rownames_to_column("id") %>% 
+  gather(key, value, -id) %>% 
+  group_by(id) %>% 
+  mutate(complete=ifelse(all(value==FALSE), TRUE, FALSE)) %>% ungroup()
+
+y_levels = as.character(seq(max(as.integer(df1$id)), 1))
+not_missing_id = which(rowSums(missing_patterns[-length(missing_patterns)]) == 0)
+
+main_plot = ggplot(df1, aes(x=factor(key, levels=levels(fct_reorder(missing_values$key, -missing_values$count))), y=factor(id, levels=y_levels))) +
+  geom_tile(color="white",aes(fill=ifelse(complete==FALSE, value, NA)), alpha = 0.75) + 
+  annotate(geom="text", x=(length(missing_values$key)+1)/2, y=max(unique(as.integer(df1$id))) - not_missing_id + 1, label="complete cases ")+
+  scale_fill_viridis_d(option="D",name="complete scale", na.value="grey") + 
+  scale_fill_manual(values = c("grey70","mediumpurple2")) +
+  xlab("variable") + ylab("missing pattern") +
+  theme_classic() + 
+  theme(legend.position = "None", 
+        axis.text.x = element_text(angle = 30, hjust=1), 
+        text = element_text(size = 6))
+
+cols = rep("cornflowerblue", max(unique(as.integer(df1$id))))
+cols[not_missing_id] = "grey"
+
+data = missing_patterns %>% 
+  rownames_to_column("id") %>% 
+  mutate(percentage = count/nrow(df) * 100)
+
+pattern_count_plot = ggplot(data,aes(x=count, y=factor(id, levels=y_levels))) +
+  geom_col(fill=cols) + 
+  xlab("row count") + 
+  ylab(" ") + 
+  theme_bw() + 
+  theme(text = element_text(size=6))
+
+pattern_percentage_plot = ggplot(data,aes(x=percentage, y=factor(id, levels=y_levels))) +
+  geom_col(fill=cols) + 
+  xlab("% rows") + 
+  ylab(" ") + 
+  xlim(0, 100) + 
+  theme_bw() + 
+  theme(text = element_text(size=6))
+
+if (!percent){
+ missing_var_pattern + plot_spacer() + main_plot + pattern_count_plot + plot_layout(ncol=2, widths = c(4,1), heights = c(1, 4)) 
+  }
+else {
+  missing_var_pattern_percentage + plot_spacer() + main_plot + pattern_percentage_plot + plot_layout(ncol=2, widths = c(4,1), heights = c(1, 4)) 
+  }
+}
+
+plot_missing(us_foreign_aid_sample, percent = TRUE)
+```
+
+
+
+
