@@ -7,3 +7,4 @@ site: bookdown::bookdown_site
 
 # Introduction
 
+We are living in an era of rapid socio-economic and political changes, most noted for the isolationist trend spearheaded by the Trump Administration, the spread of the pandemic of the coronavirus, and the new establishment of the fundamentalist Taliban government. The developing world is facing more challenges and threats than ever and the need for aids should only grow stronger. Thus, it is of great interest to investigate the evolution of the US assistance over time, so we can dissect the pattern of the aids provided to different entities and ultimately, motivate leaders and policymakers to make informed decisions regarding the future prospect of foreign assistance. To achieve this goal, we will use a dataset made publicly available that compiles the multi- dimensional information of the foreign assistance portfolio of the US government, spanning from 1946 to 2022 fiscal year.
