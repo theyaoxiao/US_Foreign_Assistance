@@ -1,31 +1,37 @@
 "","Objective","Region_Name","year","Dollar_Sum"
-"1","Economic","East Asia and Oceania",2016,679960471
-"2","Economic","East Asia and Oceania",2017,766866609
-"3","Economic","East Asia and Oceania",2018,675051601
-"4","Economic","East Asia and Oceania",2019,569888704
-"5","Economic","East Asia and Oceania",2020,507391474
-"6","Economic","East Asia and Oceania",2021,283217304
-"7","Economic","Europe and Eurasia",2016,487114039
-"8","Economic","Europe and Eurasia",2017,316541322
-"9","Economic","Europe and Eurasia",2018,399705196
-"10","Economic","Europe and Eurasia",2019,289675425
-"11","Economic","Europe and Eurasia",2020,274961458
-"12","Economic","Europe and Eurasia",2021,95403776
-"13","Economic","Middle East and North Africa",2016,829930259
-"14","Economic","Middle East and North Africa",2017,1798837990
-"15","Economic","Middle East and North Africa",2018,1276248230
-"16","Economic","Middle East and North Africa",2019,637138518
-"17","Economic","Middle East and North Africa",2020,671197698
-"18","Economic","Middle East and North Africa",2021,276624846
-"19","Economic","South and Central Asia",2016,2026827271
-"20","Economic","South and Central Asia",2017,1699757180
-"21","Economic","South and Central Asia",2018,1258970546
-"22","Economic","South and Central Asia",2019,1072122267
-"23","Economic","South and Central Asia",2020,842828709
-"24","Economic","South and Central Asia",2021,316669299
-"25","Economic","Sub-Saharan Africa",2016,6180034871
-"26","Economic","Sub-Saharan Africa",2017,6277406973
-"27","Economic","Sub-Saharan Africa",2018,5726725313
-"28","Economic","Sub-Saharan Africa",2019,5651975205
-"29","Economic","Sub-Saharan Africa",2020,4403917427
-"30","Economic","Sub-Saharan Africa",2021,2357039139
+"1","Economic","East Asia and Oceania",2015,0.58526483
+"2","Economic","East Asia and Oceania",2016,0.679960471
+"3","Economic","East Asia and Oceania",2017,0.766866609
+"4","Economic","East Asia and Oceania",2018,0.675051601
+"5","Economic","East Asia and Oceania",2019,0.569888704
+"6","Economic","East Asia and Oceania",2020,0.507391474
+"7","Economic","Europe and Eurasia",2015,0.297650042
+"8","Economic","Europe and Eurasia",2016,0.487114039
+"9","Economic","Europe and Eurasia",2017,0.316541322
+"10","Economic","Europe and Eurasia",2018,0.399705196
+"11","Economic","Europe and Eurasia",2019,0.289675425
+"12","Economic","Europe and Eurasia",2020,0.274961458
+"13","Economic","Middle East and North Africa",2015,1.085781132
+"14","Economic","Middle East and North Africa",2016,0.829930259
+"15","Economic","Middle East and North Africa",2017,1.79883799
+"16","Economic","Middle East and North Africa",2018,1.27624823
+"17","Economic","Middle East and North Africa",2019,0.637138518
+"18","Economic","Middle East and North Africa",2020,0.671197698
+"19","Economic","South and Central Asia",2015,12.424507141
+"20","Economic","South and Central Asia",2016,2.026827271
+"21","Economic","South and Central Asia",2017,1.69975718
+"22","Economic","South and Central Asia",2018,1.258970546
+"23","Economic","South and Central Asia",2019,1.072122267
+"24","Economic","South and Central Asia",2020,0.842828709
+"25","Economic","Sub-Saharan Africa",2015,6.738376926
+"26","Economic","Sub-Saharan Africa",2016,6.180034871
+"27","Economic","Sub-Saharan Africa",2017,6.277406973
+"28","Economic","Sub-Saharan Africa",2018,5.726725313
+"29","Economic","Sub-Saharan Africa",2019,5.651975205
+"30","Economic","Sub-Saharan Africa",2020,4.403917427
+"31","Economic","Western Hemisphere",2015,0.569126268
+"32","Economic","Western Hemisphere",2016,0.426367994
+"33","Economic","Western Hemisphere",2017,0.4142828
+"34","Economic","Western Hemisphere",2018,0.324920251
+"35","Economic","Western Hemisphere",2019,0.252953594
+"36","Economic","Western Hemisphere",2020,0.221568192
