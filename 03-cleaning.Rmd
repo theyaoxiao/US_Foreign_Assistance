@@ -1,1 +1,57 @@
 # Data transformation
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+```
+
+Describe the process of getting the data into a form in which you could work with it in R. If your code does not lend itself to being including in the .Rmd  file, provide a link to the folder or file(s) that contain(s) that code.
+
+As described in [Chapter 2](https://theyaoxiao.github.io/US_Foreign_Assistance/data-sources.html), we need to perform a series of steps to transform the data for use. 
+
+## Drop Redundant Variables
+
+With 2,897,021 observations and 54 variables in the original dataset, loading it requires a disk space as large as 2.4 GB. To accomplish our research goal, we decide to drop redundant columns as some of them exist purely for administrative purposes and contribute very little to generate useful insights. For example, out of the 54 variables, 24 of them have names as `ID`, `Acronym`, and `Code`. With specific names associated with these values already present in the dataset (variables ending with `Name`), we can remove these columns to save up space. Additionally, some columns represent further division of a given entity or more detailed classification of a broader category. These typically include strings `Sub` in it, such as `Managing.Agency.Name` versus                   `Managing.Sub.agency.or.Bureau.Name`. Including those incorporates unnecessary complications since we target gaining an understanding of a general representation. The final selected columns are printed as follows:
+
+```{r}
+subset_columns <- c("Country.Name", "Region.Name", "Income.Group.Name", 
+  "Managing.Agency.Name", "Implementing.Partner.Category.Name", 
+  "International.Category.Name", "International.Sector.Name", 
+  "Funding.Agency.Name", "Foreign.Assistance.Objective.Name", 
+  "Aid.Type.Group.Name", "Activity.ID", "Activity.Start.Date",
+  "Activity.End.Date", "Transaction.Type.Name", 
+  "Constant.Dollar.Amount", "year")
+
+print(subset_columns)
+```
+## Sample Applicable Observations
+
+[Chapter 2](https://theyaoxiao.github.io/US_Foreign_Assistance/data-sources.html) points out that due to differences in data collection methods and practices, observations before 2001 and those with activities affecting geographical regions not countries may be of a level of granularity distinct from the rest of the dataset. Since an understanding of a more recent, country-specific pattern is our research focus, we filtered out them. Additionally, as explained in the [Introduction](https://theyaoxiao.github.io/US_Foreign_Assistance/index.html), we want to highlight the impact of US foreign assistance on the developing world. Thus, we limit ourselves to studying countries that are classified as low and lower-middle income countries, defined as those with a GNI per capita of \$995 or less and from \$996 to \$3,895 in 2017, respectively. In the wake of these transformation steps, the dataset still has 2,196,014 rows and 16 columns, still too big to generate clear visualizations efficiently. Therefore, we then decide to take a random sample of a size of 263,053 to accommodate csv files with the maximum size of 100 MB that can be uploaded to Github. Detailed codes used during the data transformation process is recorded in the [`.Rmd` file](https://github.com/theyaoxiao/US_Foreign_Assistance/blob/main/03-cleaning.Rmd) for this chapter.
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE, eval=FALSE}
+us_foreign_aid_complete <- read.csv("https://s3.amazonaws.com/files.explorer.devtechlab.com/us_foreign_aid_complete.csv")
+dim(us_foreign_aid_complete)
+```
+
+```{r, eval=FALSE}
+library(dplyr)
+us_foreign_aid_subset <- us_foreign_aid_complete %>%
+  filter(year > 2001 & Income.Group.Name %in% 
+           c("Low Income Country", "Lower Middle Income Country", "NULL")) %>%
+  select(subset_columns)
+```
+
+
+```{r, eval=FALSE}
+us_foreign_aid_sample <- us_foreign_aid_subset[sample(nrow(us_foreign_aid_subset), 365000),]
+
+for(col in colnames(us_foreign_aid_sample)){
+  us_foreign_aid_sample[which(us_foreign_aid_sample[col] == "NULL"),] <- NA
+}
+```
+
+
+```{r, eval=FALSE}
+write.csv(us_foreign_aid_sample, "./data/final_data.csv")
+```
+
+

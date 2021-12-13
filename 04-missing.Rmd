@@ -1,9 +1,8 @@
 # Missing values
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
 ```
-
 
 ```{r, echo=FALSE}
 library(tidyverse)
@@ -13,14 +12,14 @@ library(patchwork)
 library(ggnewscale)
 ```
 
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
-us_foreign_aid_sample <- read.csv("./data/us_foreign_aid_sample.csv")
+```{r}
+us_foreign_aid_sample <- read.csv("./data/final_data.csv")
 us_foreign_aid_sample$X <- NULL
 ```
 
-The dataset has a total of 365,0000 rows and 16 features of interest. As is summarized in Table 4.1 which computes the number of missing values for each variable, we see that data are missing only in two specific fields: `Activity.Start.Date` and  `Activity.End.Date`. These two refer to the start and end dates of different US foreign aids program activities. These may cause issues that hinder our understanding of the time pattern of the data. For example, with a majority of the dataset missing these two variables, it may be hard to generalize an expected duration of the program activities. However, since none of the `year` column contains missing data, we can still surmise the approximate time frame of each activity implemented. 
+After performing data cleaning in [Chapter 3](https://theyaoxiao.github.io/US_Foreign_Assistance/data-transformation.html), the dataset we will use has a total of 263,053 rows and 16 features of interest. As is summarized in Table 4.1 which computes the number of missing values for each variable, we see that data are missing only in two specific fields: `Activity.Start.Date` and  `Activity.End.Date`. These two refer to the start and end dates of different US foreign aids program activities. These may cause issues that hinder our understanding of the time pattern of the data. For example, with a majority of the dataset missing these two variables, it may be hard to generalize an expected duration of the program activities. For our purposes, in the final analysis, we choose not to include these two columns. However, since none of the `year` column contains missing data, we can still surmise the approximate time frame of each activity implemented. 
 
-```{r, echo = FALSE, message=FALSE, warning=FALSE}
+```{r}
 na_count_by_variable <- as.data.frame(colSums(is.na(us_foreign_aid_sample)))
 na_count_by_variable <- na_count_by_variable %>%
   rownames_to_column("variable_name") %>%
@@ -32,6 +31,8 @@ kable(na_count_by_variable,
       caption = "Number of Rows Missing by Variable",
       align = "l", table.attr = "style='width:30%;'" )
 ```
+
+
 Also, we can take a closer look at the missingness pattern and observe for which combination of attributes, missing data are the most common. According to the results outlined in Table 4.2, observations that are missing both `Activity.Start.Date` and `Activity.End.Date` are the most dominant. Observations that do not have data for either `Activity.Start.Date` or `Activity.End.Date` come second. Noticeably, observations with data on `Activity.Start.Date` are significantly more than those with data on `Activity.End.Date`. This may indicate that the US government implements their foreign aid program activities that often do not have designated end dates.
 
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
