@@ -24,7 +24,7 @@
 <meta name="author" content="Tianmai Jiao, Yao Xiao" />
 
 
-<meta name="date" content="2021-11-18" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,10 +74,23 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#validity-and-reliability-of-the-data-source"><i class="fa fa-check"></i><b>2.1</b> Validity and Reliability of the Data Source</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#description-of-the-dataset"><i class="fa fa-check"></i><b>2.2</b> Description of the Dataset</a></li>
+<li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#issues-with-the-dataset"><i class="fa fa-check"></i><b>2.3</b> Issues with the Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#drop-redundant-variables"><i class="fa fa-check"></i><b>3.1</b> Drop Redundant Variables</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#sample-applicable-observations"><i class="fa fa-check"></i><b>3.2</b> Sample Applicable Observations</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#trend-of-foreign-assistance-towards-objective-and-deep-dive-into-the-change"><i class="fa fa-check"></i><b>5.1</b> Trend of foreign assistance towards objective and deep dive into the change</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#investigate-the-proportion-of-and-association-between-transaction-type-and-region"><i class="fa fa-check"></i><b>5.2</b> Investigate the proportion of and association between “transaction type” and “region”</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
@@ -102,16 +115,17 @@
 <div id="header">
 <h1 class="title">Visualizing US Foreign Assistance Projects</h1>
 <p class="author"><em>Tianmai Jiao, Yao Xiao</em></p>
-<p class="date"><em>2021-11-18</em></p>
+<p class="date"><em>2021-12-13</em></p>
 </div>
 <div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>We are living in an era of rapid socio-economic and political changes, most noted for the isolationist trend spearheaded by the Trump Administration, the spread of the pandemic of the coronavirus, and the new establishment of the fundamentalist Taliban government. The developing world is facing more challenges and threats than ever and the need for aids should only grow stronger. Thus, it is of great interest to investigate the evolution of the US assistance over time, so we can dissect the pattern of the aids provided to different entities and ultimately, motivate leaders and policymakers to make informed decisions regarding the future prospect of foreign assistance. To achieve this goal, we will use a dataset made publicly available that compiles the multi- dimensional information of the foreign assistance portfolio of the US government, spanning from 1946 to 2022 fiscal year. Some of the research questions we intend to explore are listed as follows:</p>
+<p>We are living in an era of rapid socio-economic and political changes, most noted for the isolationist trend spearheaded by the Trump Administration, the spread of the pandemic of the coronavirus, and the new establishment of the fundamentalist Taliban government. The developing world is facing more challenges and threats than ever and the need for aids should only grow stronger. Thus, it is of great interest to investigate the evolution of the US foreign assistance over time, which is activities funded by the United States to other countries to support global peace, security, and development efforts, as well as to provide humanitarian relief during times of crisis. Analyzing the US foreign assistance projects allows us to dissect the pattern of the aids provided to different entities and ultimately, motivate leaders and policymakers to make informed decisions strategically and economically regarding the future prospect of foreign assistance and US national security. To achieve this goal, we will use a dataset made publicly available that compiles the multi-dimensional information of the foreign assistance portfolio of the US government, spanning from 1946 to 2022 fiscal year. Some of the research questions we intend to explore are listed as follows:</p>
 <p>• What categories did the US aids consistently devote the most resources to?</p>
 <p>• What countries were the biggest beneficiaries of the US foreign assistance?</p>
 <p>• Did the recent growth and development of the private sector investments, NGOs, and other new sectors impact the role of the bilateral and multilateral organizations (e.g. USAID, World Bank, etc.) in providing aids?</p>
-<p>• Did the overall time frame of the programs change? Has the duration of the program activities become longer or shorter?</p>
 <p>• Are there noticeable relationships between the fields?</p>
+<p>• Did the overall time frame of the programs change? What is the trend of changes in foreign assistance objective?</p>
+<p>• Are there noticeable relationships between the fields, such as transaction type and region?</p>
 <p>• How did the major economic shocks (e.g. subprime mortgage crisis in 2008 and the current pandemic of COVID-19) affect the pattern of the US foreign aids provided to the developing countries?</p>
 
 </div>

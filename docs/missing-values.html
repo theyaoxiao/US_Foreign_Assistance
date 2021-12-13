@@ -24,7 +24,7 @@
 <meta name="author" content="Tianmai Jiao, Yao Xiao" />
 
 
-<meta name="date" content="2021-11-18" />
+<meta name="date" content="2021-12-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,12 +74,28 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#validity-and-reliability-of-the-data-source"><i class="fa fa-check"></i><b>2.1</b> Validity and Reliability of the Data Source</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#description-of-the-dataset"><i class="fa fa-check"></i><b>2.2</b> Description of the Dataset</a></li>
+<li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#issues-with-the-dataset"><i class="fa fa-check"></i><b>2.3</b> Issues with the Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#drop-redundant-variables"><i class="fa fa-check"></i><b>3.1</b> Drop Redundant Variables</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#sample-applicable-observations"><i class="fa fa-check"></i><b>3.2</b> Sample Applicable Observations</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#trend-of-foreign-assistance-towards-objective-and-deep-dive-into-the-change"><i class="fa fa-check"></i><b>5.1</b> Trend of foreign assistance towards objective and deep dive into the change</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#investigate-the-proportion-and-association-of-transaction-type-name-region-name"><i class="fa fa-check"></i><b>5.2</b> Investigate the proportion and association of “transaction type name”, “region name”</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="chapter" data-level="8" data-path="interactive-component-2.html"><a href="interactive-component-2.html"><i class="fa fa-check"></i><b>8</b> Interactive Component 2</a></li>
+<li class="chapter" data-level="9" data-path="results-1.html"><a href="results-1.html"><i class="fa fa-check"></i><b>9</b> Results</a></li>
+<li class="chapter" data-level="10" data-path="data-transformation-1.html"><a href="data-transformation-1.html"><i class="fa fa-check"></i><b>10</b> Data transformation</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -101,9 +117,9 @@
             <section class="normal" id="section-">
 <div id="missing-values" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
-<p>The dataset has a total of 365,0000 rows and 16 features of interest. As is summarized in Table 4.1 which computes the number of missing values for each variable, we see that data are missing only in two specific fields: <code>Activity.Start.Date</code> and <code>Activity.End.Date</code>. These two refer to the start and end dates of different US foreign aids program activities. These may cause issues that hinder our understanding of the chronology of the data. For example, with a majority of the dataset missing these two variables, it may be hard to generalize an overall pattern of the duration of the program activities. However, since none of the <code>year</code> column contains missing data, we can still surmise the approximate time frame of each activity implemented.</p>
+<p>After performing data cleaning in <a href="https://theyaoxiao.github.io/US_Foreign_Assistance/data-transformation.html">Chapter 3</a>, the dataset we will use has a total of 263,053 rows and 16 features of interest. As is summarized in Table 4.1 which computes the number of missing values for each variable, we see that data are missing only in two specific fields: <code>Activity.Start.Date</code> and <code>Activity.End.Date</code>. These two refer to the start and end dates of different US foreign aids program activities. These may cause issues that hinder our understanding of the time pattern of the data. For example, with a majority of the dataset missing these two variables, it may be hard to generalize an expected duration of the program activities. For our purposes, in the final analysis, we choose not to include these two columns. However, since none of the <code>year</code> column contains missing data, we can still surmise the approximate time frame of each activity implemented.</p>
 <table>
-<caption><span id="tab:unnamed-chunk-7">Table 4.1: </span>Number of Rows Missing by Variable</caption>
+<caption><span id="tab:unnamed-chunk-6">Table 4.1: </span>Number of Rows Missing by Variable</caption>
 <thead>
 <tr class="header">
 <th align="left">variable_name</th>
@@ -113,17 +129,17 @@
 <tbody>
 <tr class="odd">
 <td align="left">Activity.End.Date</td>
-<td align="left">302423</td>
+<td align="left">217358</td>
 </tr>
 <tr class="even">
 <td align="left">Activity.Start.Date</td>
-<td align="left">282800</td>
+<td align="left">203816</td>
 </tr>
 </tbody>
 </table>
-<p>Also, we can take a closer look at the missingness pattern and observe for which combination of attributes, missing data are the most common. According to the results outlined in Table 4.2, observations that are missing both <code>Activity.Start.Date</code> and <code>Activity.End.Date</code> are the most dominant. Observations that do not have data for either <code>Activity.Start.Date</code> or <code>Activity.End.Date</code> come second. Noticeably, observations with data on <code>Activity.Start.Date</code> are significantly more than those with data on <code>Activity.End.Date</code>. This may indicate that the US government implements their foreign aid program activities that often do not have a designated end date.</p>
+<p>Also, we can take a closer look at the missingness pattern and observe for which combination of attributes, missing data are the most common. According to the results outlined in Table 4.2, observations that are missing both <code>Activity.Start.Date</code> and <code>Activity.End.Date</code> are the most dominant. Observations that do not have data for either <code>Activity.Start.Date</code> or <code>Activity.End.Date</code> come second. Noticeably, observations with data on <code>Activity.Start.Date</code> are significantly more than those with data on <code>Activity.End.Date</code>. This may indicate that the US government implements their foreign aid program activities that often do not have designated end dates.</p>
 <table>
-<caption><span id="tab:unnamed-chunk-8">Table 4.2: </span>Number of Rows with a Specified Missing Pattern</caption>
+<caption><span id="tab:unnamed-chunk-7">Table 4.2: </span>Number of Rows with a Specified Missing Pattern</caption>
 <thead>
 <tr class="header">
 <th align="left">Activity.Start.Date</th>
@@ -137,30 +153,30 @@
 <td align="left">TRUE</td>
 <td align="left">TRUE</td>
 <td align="left">FALSE</td>
-<td align="left">279546</td>
+<td align="left">201564</td>
 </tr>
 <tr class="even">
 <td align="left">FALSE</td>
 <td align="left">FALSE</td>
 <td align="left">FALSE</td>
-<td align="left">59323</td>
+<td align="left">43443</td>
 </tr>
 <tr class="odd">
 <td align="left">FALSE</td>
 <td align="left">TRUE</td>
 <td align="left">FALSE</td>
-<td align="left">22877</td>
+<td align="left">15794</td>
 </tr>
 <tr class="even">
 <td align="left">TRUE</td>
 <td align="left">FALSE</td>
 <td align="left">FALSE</td>
-<td align="left">3254</td>
+<td align="left">2252</td>
 </tr>
 </tbody>
 </table>
 <p>To visualize the missingness pattern in juxtaposition with the number of missing rows for each column already mentioned and interpreted from the above summary tables, the following graph provides further details on the proportion of rows that are missing. We observe that around 80% of the data contain missing values for one or both of <code>Activity.Start.Date</code> and <code>Activity.End.Date</code>. More specifically, rows contain missing values for both of <code>Activity.Start.Date</code> and <code>Activity.End.Date</code> account for 76.6% of the dataset, and rows that have no missing values account for 16.3% of the dataset. 6.3% of data are rows that do not have values for <code>Activity.End.Date</code>, and 0.9% of data do not have values for <code>Activity.Start.Date</code>.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 
 </div>
             </section>

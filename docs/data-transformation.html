@@ -24,7 +24,7 @@
 <meta name="author" content="Tianmai Jiao, Yao Xiao" />
 
 
-<meta name="date" content="2021-11-18" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,10 +74,23 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#validity-and-reliability-of-the-data-source"><i class="fa fa-check"></i><b>2.1</b> Validity and Reliability of the Data Source</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#description-of-the-dataset"><i class="fa fa-check"></i><b>2.2</b> Description of the Dataset</a></li>
+<li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#issues-with-the-dataset"><i class="fa fa-check"></i><b>2.3</b> Issues with the Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#drop-redundant-variables"><i class="fa fa-check"></i><b>3.1</b> Drop Redundant Variables</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#sample-applicable-observations"><i class="fa fa-check"></i><b>3.2</b> Sample Applicable Observations</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#trend-of-foreign-assistance-towards-objective-and-deep-dive-into-the-change"><i class="fa fa-check"></i><b>5.1</b> Trend of foreign assistance towards objective and deep dive into the change</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#investigate-the-proportion-of-and-association-between-transaction-type-and-region"><i class="fa fa-check"></i><b>5.2</b> Investigate the proportion of and association between “transaction type” and “region”</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
@@ -101,7 +114,25 @@
             <section class="normal" id="section-">
 <div id="data-transformation" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Data transformation</h1>
+<p>Describe the process of getting the data into a form in which you could work with it in R. If your code does not lend itself to being including in the .Rmd file, provide a link to the folder or file(s) that contain(s) that code.</p>
+<p>As described in <a href="https://theyaoxiao.github.io/US_Foreign_Assistance/data-sources.html">Chapter 2</a>, we need to perform a series of steps to transform the data for use.</p>
+<div id="drop-redundant-variables" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Drop Redundant Variables</h2>
+<p>With 2,897,021 observations and 54 variables in the original dataset, loading it requires a disk space as large as 2.4 GB. To accomplish our research goal, we decide to drop redundant columns as some of them exist purely for administrative purposes and contribute very little to generate useful insights. For example, out of the 54 variables, 24 of them have names as <code>ID</code>, <code>Acronym</code>, and <code>Code</code>. With specific names associated with these values already present in the dataset (variables ending with <code>Name</code>), we can remove these columns to save up space. Additionally, some columns represent further division of a given entity or more detailed classification of a broader category. These typically include strings <code>Sub</code> in it, such as <code>Managing.Agency.Name</code> versus <code>Managing.Sub.agency.or.Bureau.Name</code>. Including those incorporates unnecessary complications since we target gaining an understanding of a general representation. The final selected columns are printed as follows:</p>
+<pre><code>##  [1] &quot;Country.Name&quot;                       &quot;Region.Name&quot;                       
+##  [3] &quot;Income.Group.Name&quot;                  &quot;Managing.Agency.Name&quot;              
+##  [5] &quot;Implementing.Partner.Category.Name&quot; &quot;International.Category.Name&quot;       
+##  [7] &quot;International.Sector.Name&quot;          &quot;Funding.Agency.Name&quot;               
+##  [9] &quot;Foreign.Assistance.Objective.Name&quot;  &quot;Aid.Type.Group.Name&quot;               
+## [11] &quot;Activity.ID&quot;                        &quot;Activity.Start.Date&quot;               
+## [13] &quot;Activity.End.Date&quot;                  &quot;Transaction.Type.Name&quot;             
+## [15] &quot;Constant.Dollar.Amount&quot;             &quot;year&quot;</code></pre>
+</div>
+<div id="sample-applicable-observations" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Sample Applicable Observations</h2>
+<p><a href="https://theyaoxiao.github.io/US_Foreign_Assistance/data-sources.html">Chapter 2</a> points out that due to differences in data collection methods and practices, observations before 2001 and those with activities affecting geographical regions not countries may be of a level of granularity distinct from the rest of the dataset. Since an understanding of a more recent, country-specific pattern is our research focus, we filtered out them. Additionally, as explained in the <a href="https://theyaoxiao.github.io/US_Foreign_Assistance/index.html">Introduction</a>, we want to highlight the impact of US foreign assistance on the developing world. Thus, we limit ourselves to studying countries that are classified as low and lower-middle income countries, defined as those with a GNI per capita of $995 or less and from $996 to $3,895 in 2017, respectively. In the wake of these transformation steps, the dataset still has 2,196,014 rows and 16 columns, still too big to generate clear visualizations efficiently. Therefore, we then decide to take a random sample of a size of 263,053 to accommodate csv files with the maximum size of 100 MB that can be uploaded to Github. Detailed codes used during the data transformation process is recorded in the <a href="https://github.com/theyaoxiao/US_Foreign_Assistance/blob/main/03-cleaning.Rmd"><code>.Rmd</code> file</a> for this chapter.</p>
 
+</div>
 </div>
             </section>
 

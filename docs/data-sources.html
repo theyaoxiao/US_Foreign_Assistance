@@ -24,7 +24,7 @@
 <meta name="author" content="Tianmai Jiao, Yao Xiao" />
 
 
-<meta name="date" content="2021-11-18" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,10 +74,23 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#validity-and-reliability-of-the-data-source"><i class="fa fa-check"></i><b>2.1</b> Validity and Reliability of the Data Source</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#description-of-the-dataset"><i class="fa fa-check"></i><b>2.2</b> Description of the Dataset</a></li>
+<li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#issues-with-the-dataset"><i class="fa fa-check"></i><b>2.3</b> Issues with the Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#drop-redundant-variables"><i class="fa fa-check"></i><b>3.1</b> Drop Redundant Variables</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#sample-applicable-observations"><i class="fa fa-check"></i><b>3.2</b> Sample Applicable Observations</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#trend-of-foreign-assistance-towards-objective-and-deep-dive-into-the-change"><i class="fa fa-check"></i><b>5.1</b> Trend of foreign assistance towards objective and deep dive into the change</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#investigate-the-proportion-of-and-association-between-transaction-type-and-region"><i class="fa fa-check"></i><b>5.2</b> Investigate the proportion of and association between “transaction type” and “region”</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
@@ -101,8 +114,19 @@
             <section class="normal" id="section-">
 <div id="data-sources" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Data sources</h1>
-<p>Data Source: <a href="https://foreignassistance.gov/data" class="uri">https://foreignassistance.gov/data</a></p>
+<div id="validity-and-reliability-of-the-data-source" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Validity and Reliability of the Data Source</h2>
+<p>Our project uses the dataset <code>us_foriegn_aid_complete.csv</code> obtained from <a href="https://foreignassistance.gov/data">ForeignAssistance.gov</a>, which is the U.S. government’s flagship website that makes the full lifecycle of all US government’s foreign assistance data available for public transparency and accountability. The data collection efforts are conducted by the Foreign Assistance Data and Reporting Team from the Department of State and the United States Agency for International Development (FA-DART) and are authorized by the US Office of Management and Budget (OMB). The assistance activities include project, program, cash transfer, delivery of goods, training course, technical assistance, research project, debt relief operation, or a contribution to an international organization, all of which are submitted by respective U.S. government agencies, processed, verified, and combined with the budgetary planning information of the Congress by the reporting team. The data are quarterly uploaded to the website.</p>
+</div>
+<div id="description-of-the-dataset" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Description of the Dataset</h2>
+<p>The dataset has 2,897,021 observations and 54 variables. Examples of the variables include <code>Country ID</code>, <code>Income.Group.Name</code>, <code>Managing.Agency.Acronym</code>, <code>Implementing.Partner.Name</code>, <code>International.Category.ID</code>, <code>Funding.Agency.Name</code>, <code>Foreign.Assistance.Objective.ID</code>, <code>Activity.Start.Date</code>, <code>Constant.Dollar.Amount</code>, <code>year</code>, etc. Most of the columns are categorical variables that note information about specific entities that participate in the assistance activities, and a few like <code>year</code> and <code>Constant.Dollar.Amount</code> are numeric ones that record the dates and dollar amounts adjusted for inflation of the aid activities.</p>
+</div>
+<div id="issues-with-the-dataset" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Issues with the Dataset</h2>
+<p>There are a couple of existing problems with the dataset. The first is the immense size of the dataset, so performing exploratory data analysis on it slows computation severely and renders messy and dense visualizations that jeopardize clarity and informativeness for presentation. Second, since the dataset dates back to 1946, there are some discrepancies and inconsistencies due to historical reasons. For example, the U.S. foreign assistance data reported to USAID did not contain activity-level information nor disbursements before 2001. Also, significant lags in reporting are prevalent in assistance activities related to food and military, and thus are often subject to revision. Thus the quality of the data in these areas can hinders our efforts to represent the most accurate picture. Third, by examining the dataset, we found that the dataset contains “NULL” data in the <code>Income.Group.Name</code>, which is a column that classifies the aid recipient countries by income levels, in accordance with the current World Bank Income Group Country Classification. Based on the criteria of GNI per capita, there are four income groups: low, lower-middle, upper-middle, and high. However, our dataset includes activities of scale of region, such as <code>Eastern Africa Region</code>, <code>Latin America and Caribbean Region</code>, <code>Asia Region</code>, <code>Sub-Saharan Africa Region</code>, <code>World</code>, etc. These represent activities that affect a collection of countries that fall within the same specified geographical area, and therefore can not be generalized to one “Income Group”. So these rows have “NULL” values for <code>Income.Group.Name</code> so as not to distort the analysis. The presence of the aforementioned problems prompt us to perform additional data wrangling, transformation and looking at data of our research interests, as described in <a href="https://theyaoxiao.github.io/US_Foreign_Assistance/data-transformation.html">Chapter 3</a>.</p>
 
+</div>
 </div>
             </section>
 
