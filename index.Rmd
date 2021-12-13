@@ -7,15 +7,13 @@ site: bookdown::bookdown_site
 
 # Introduction
 
-We are living in an era of rapid socio-economic and political changes, most noted for the isolationist trend spearheaded by the Trump Administration, the spread of the pandemic of the coronavirus, and the new establishment of the fundamentalist Taliban government. The developing world is facing more challenges and threats than ever and the need for aids should only grow stronger. Thus, it is of great interest to investigate the evolution of the US assistance over time, so we can dissect the pattern of the aids provided to different entities and ultimately, motivate leaders and policymakers to make informed decisions regarding the future prospect of foreign assistance. To achieve this goal, we will use a dataset made publicly available that compiles the multi- dimensional information of the foreign assistance portfolio of the US government, spanning from 1946 to 2022 fiscal year. Some of the research questions we intend to explore are listed as follows:
+We are living in an era of rapid socio-economic and political changes, most noted for the isolationist trend spearheaded by the Trump Administration, the spread of the pandemic of the coronavirus, and the new establishment of the fundamentalist Taliban government. The developing world is facing more challenges and threats than ever and the need for aids should only grow stronger. Thus, it is of great interest to investigate the evolution of the US foreign assistance over time, which is activities funded by the United States to other countries to support global peace, security, and development efforts, as well as to provide humanitarian relief during times of crisis. Analyzing the US foreign assistance projects allows us to dissect the pattern of the aids provided to different entities and ultimately, motivate leaders and policymakers to make informed decisions strategically and economically regarding the future prospect of foreign assistance and US national security. To achieve this goal, we will use a dataset made publicly available that compiles the multi-dimensional information of the foreign assistance portfolio of the US government, spanning from 1946 to 2022 fiscal year. Some of the research questions we intend to explore are listed as follows:
 
 • What categories did the US aids consistently devote the most resources to?
 
 • What countries were the biggest beneficiaries of the US foreign assistance?
 
 • Did the recent growth and development of the private sector investments, NGOs, and other new sectors impact the role of the bilateral and multilateral organizations (e.g. USAID, World Bank, etc.) in providing aids?
-
-• Did the overall time frame of the programs change? Has the duration of the program activities become longer or shorter?
 
 • Are there noticeable relationships between the fields?
 
