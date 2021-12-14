@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <title>D3 Multi Line Chart</title>
+    <style>
+      .filters {
+        display: flex;
+        margin-left: 20px;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      #tooltip {
+        position: absolute;
+        height: auto;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        pointer-events: none;
+      }
+
+      .economic {
+        margin-right: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="filters">
+      <div class="economic">
+        <input
+          type="radio"
+          id="economic"
+          name="data"
+          value="economic"
+          checked
+        />
+        <label for="economic">Economic</label>
+      </div>
+
+      <div>
+        <input type="radio" id="military" name="data" value="military" />
+        <label for="military">Military</label>
+      </div>
+    </div>
+
+    <div id="tooltip"></div>
+    <div id="line-chart"></div>
+    <script>
+      const drawLine = async () => {
+        const margin = { top: 20, right: 20, bottom: 30, left: 90 };
+        const width = 525 - margin.left - margin.right;
+        const height = 450 - margin.top - margin.bottom;
+        const military = await d3.csv(
+          "https://raw.githubusercontent.com/theyaoxiao/US_Foreign_Assistance/main/data/d3data_military.csv"
+        );
+        const economic = await d3.csv(
+          "https://raw.githubusercontent.com/theyaoxiao/US_Foreign_Assistance/main/data/d3data_economic.csv"
+        );
+        let selectedData = "economic";
+
+        military.forEach((d) => {
+          d.year = +d.year.replace(/,/g, "");
+        });
+
+        economic.forEach((d) => {
+          d.year = +d.year.replace(/,/g, "");
+        });
+
+        let data =
+          selectedData === "economic"
+            ? economic.filter(
+                (d) =>
+                  d.Region_Name === "East Asia and Oceania" ||
+                  d.Region_Name === "Europe and Eurasia" ||
+                  d.Region_Name === "Middle East and North Africa" ||
+                  d.Region_Name === "South and Central Asia" ||
+                  d.Region_Name === "Sub-Saharan Africa"
+              )
+            : military.filter(
+                (d) =>
+                  d.Region_Name === "East Asia and Oceania" ||
+                  d.Region_Name === "Europe and Eurasia" ||
+                  d.Region_Name === "Middle East and North Africa" ||
+                  d.Region_Name === "South and Central Asia" ||
+                  d.Region_Name === "Sub-Saharan Africa"
+              );
+
+        const colorScale = d3
+          .scaleOrdinal()
+          .domain(data.map((d) => d.Region_Name))
+          .range(d3.schemeCategory10);
+
+        let groups = d3.groups(data, (d) => d.Region_Name);
+
+        const svg = d3
+          .select("#line-chart")
+          .append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+          .attr(
+            "transform",
+            "translate(" + margin.left + "," + margin.top + ")"
+          );
+
+        const tooltip = d3
+          .select("#tooltip")
+          .attr("class", "tooltip")
+          .style("opacity", 0);
+
+        const tooltipLine = svg.append("line").attr("class", "tooltip-line");
+
+        const x = d3
+          .scaleLinear()
+          .domain(d3.extent(data, (d) => +d.year))
+          .range([0, width])
+          .nice();
+
+        svg
+          .append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x).tickFormat(d3.format("d")).ticks(5))
+          .selectAll("text")
+          .attr("color", "#777777")
+          .attr("font-size", "12px")
+          .call((g) => g.select(".domain").attr("stroke", "#777777"))
+          .selectAll(".tick line")
+          .attr("stroke", "#777777");
+
+        const y = d3
+          .scaleLinear()
+          .domain([0, d3.max(data, (d) => +d.Dollar_Sum)])
+          .range([height, 0])
+          .nice();
+
+        svg
+          .append("g")
+          .call(d3.axisLeft(y).tickFormat(function(d){return d/10000000 + " Million"}))
+          .selectAll("text")
+          .attr("color", "#777777")
+          .attr("font-size", "12px")
+          .call((g) => g.select(".domain").attr("stroke", "#777777"))
+          .selectAll(".tick line")
+          .attr("stroke", "#777777");
+
+        const lineGenerator = d3
+          .line()
+          .x((d) => x(+d.year))
+          .y((d) => y(+d.Dollar_Sum));
+
+        const line = svg
+          .selectAll(".line-chart")
+          .data(groups)
+          .join("path")
+          .attr("class", "line-chart");
+
+        line
+          .transition()
+          .duration(1000)
+          .attr("d", (d) => lineGenerator(d[1]))
+          .attr("stroke", (d) => colorScale(d[0]))
+          .attr("stroke-width", 2)
+          .attr("fill", "none");
+
+        const tipBox = svg
+          .append("rect")
+          .attr("width", width)
+          .attr("height", height)
+          .attr("opacity", 0)
+          .on("mousemove", function (e, d) {
+            const year = Math.floor(x.invert(d3.pointer(e)[0])) + 1;
+            tooltip.transition().duration(200).style("opacity", 1);
+            tooltipLine
+              .attr("x1", x(year))
+              .attr("x2", x(year))
+              .attr("y1", 0)
+              .attr("y2", height)
+              .attr("stroke", "#ddd")
+              .attr("stroke-width", 2)
+              .attr("opacity", 1);
+            tooltip
+              .html(year)
+              .style("left", e.pageX + 10 + "px")
+              .style("top", e.pageY - 28 + "px")
+              .selectAll()
+              .data(groups)
+              .enter()
+              .append("div")
+              .attr("class", "tooltip-content")
+              .html((d) => {
+                const region = d[0];
+                const regionData = d[1].filter((d) => d.year === year);
+                const dollarSum = Math.round(regionData[0].Dollar_Sum/1000000);
+                let dS = dollarSum.toString() + " Million";
+                return `${region}: ${dS}`;
+              });
+          })
+          .on("mouseout", function (e, d) {
+            tooltip.transition().duration(500).style("opacity", 0);
+            tooltipLine.attr("opacity", 0);
+          });
+
+        function update(value) {
+          selectedData = value;
+          data =
+            selectedData === "economic"
+              ? economic.filter(
+                  (d) =>
+                    d.Region_Name === "East Asia and Oceania" ||
+                    d.Region_Name === "Europe and Eurasia" ||
+                    d.Region_Name === "Middle East and North Africa" ||
+                    d.Region_Name === "South and Central Asia" ||
+                    d.Region_Name === "Sub-Saharan Africa"
+                )
+              : military.filter(
+                  (d) =>
+                    d.Region_Name === "East Asia and Oceania" ||
+                    d.Region_Name === "Europe and Eurasia" ||
+                    d.Region_Name === "Middle East and North Africa" ||
+                    d.Region_Name === "South and Central Asia" ||
+                    d.Region_Name === "Sub-Saharan Africa"
+                );
+
+          y.domain([0, d3.max(data, (d) => +d.Dollar_Sum)]).nice();
+
+          svg.selectAll(".line-chart").remove();
+
+          groups = d3.groups(data, (d) => d.Region_Name);
+
+          svg
+            .selectAll(".line-chart")
+            .data(groups)
+            .join("path")
+            .attr("class", "line-chart")
+            .transition()
+            .duration(1000)
+            .attr("d", (d) => lineGenerator(d[1]))
+            .attr("stroke", (d) => colorScale(d[0]))
+            .attr("stroke-width", 2)
+            .attr("fill", "none");
+        }
+
+        d3.selectAll("input").on("change", function () {
+          const value = this.value;
+          selectedData = value;
+          update(value);
+        });
+      };
+
+      drawLine();
+    </script>
+  </body>
+</html>

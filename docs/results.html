@@ -24,7 +24,7 @@
 <meta name="author" content="Tianmai Jiao, Yao Xiao" />
 
 
-<meta name="date" content="2021-11-18" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -74,10 +74,25 @@
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
-<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="data-sources.html"><a href="data-sources.html#validity-and-reliability-of-the-data-source"><i class="fa fa-check"></i><b>2.1</b> Validity and Reliability of the Data Source</a></li>
+<li class="chapter" data-level="2.2" data-path="data-sources.html"><a href="data-sources.html#description-of-the-dataset"><i class="fa fa-check"></i><b>2.2</b> Description of the Dataset</a></li>
+<li class="chapter" data-level="2.3" data-path="data-sources.html"><a href="data-sources.html#issues-with-the-dataset"><i class="fa fa-check"></i><b>2.3</b> Issues with the Dataset</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-transformation.html"><a href="data-transformation.html#drop-redundant-variables"><i class="fa fa-check"></i><b>3.1</b> Drop Redundant Variables</a></li>
+<li class="chapter" data-level="3.2" data-path="data-transformation.html"><a href="data-transformation.html#sample-applicable-observations"><i class="fa fa-check"></i><b>3.2</b> Sample Applicable Observations</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#trend-of-changes-in-foreign-assistance-objective"><i class="fa fa-check"></i><b>5.1</b> Trend of changes in foreign assistance objective</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#explore-the-distribution-of-dollar-amounts-of-foreign-assistance-in-countries-in-south-and-central-asia-as-well-as-middle-east-and-north-africa-region-in-recent-5-years-and-deep-dive-into-the-top-country"><i class="fa fa-check"></i><b>5.2</b> Explore the distribution of dollar amounts of foreign assistance in countries in “South and Central Asia” as well as “Middle East and North Africa” region in recent 5 years and deep dive into the top country</a></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#what-is-the-distribution-of-international-category-and-to-explore-the-difference-in-income-group"><i class="fa fa-check"></i><b>5.3</b> What is the distribution of “international category” and to explore the difference in income group</a></li>
+<li class="chapter" data-level="5.4" data-path="results.html"><a href="results.html#did-covid-19-affect-the-patterns-of-different-types-of-aids"><i class="fa fa-check"></i><b>5.4</b> Did COVID-19 affect the patterns of different types of aids?</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
@@ -101,7 +116,70 @@
             <section class="normal" id="section-">
 <div id="results" class="section level1" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Results</h1>
+<div id="trend-of-changes-in-foreign-assistance-objective" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Trend of changes in foreign assistance objective</h2>
+<p><code>Figure 5.1</code> plots the time series of aid programs with economic objectives versus military objectives from 2015 to 2020. We can clearly see that the scale of economic assistance is greater than military assistance for the entire time span in question, while the pattern of changes over time is different. The military assistance indicates a reasonably fluctuating trend and generally stays at the same level. In contrast, the economic assistance always shows a continual downward trend, most noted . Thus, we intend to explore the reason for the decrease change of economic assistance.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" alt="U.S foreign aids directed toward different objectives" width="1152" />
+<p class="caption">
+Figure 5.1: U.S foreign aids directed toward different objectives
+</p>
+</div>
+<p>The trend of economic assistance in low income and lower-middle income countries is similar indicated by the following graph. Then, we want to deep dive into economic assistance towards different region.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
+<img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" alt="U.S foreign aids directed towards different economies" width="1152" />
+<p class="caption">
+Figure 5.2: U.S foreign aids directed towards different economies
+</p>
+</div>
+<p>We are interested in “Sub-Saharan African” and “Middle East and North Africa” groups since the later has a fancy fluctuating trend between 2016 to 2020 and the former has a similar trend with economic assistance as of 2017, which may be the main reason to explain the downward trend. For other groups, the economic assistance does not change too much.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" alt="U.S. economic assistance for different regions" width="1152" />
+<p class="caption">
+Figure 5.3: U.S. economic assistance for different regions
+</p>
+</div>
+<p>Now, we want to explore the trend of implementing partner category for economic assistance in “Sub-Saharan African” region. From the graph below, we can see the government category has decreased a lot as of 2017 but the change for other categories have minor changes, which is consistent with the change of economic assistance as of 2017 in “Middle East and North Africa”</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" width="1152" /></p>
+<p>The below figure is the trend of implementing partner category for economic assistance in “Middle East and North Africa” region. It shows that the government category is the dominant factor that affects the economic assistance. Similarly, the trend is consistent with the change of economic assistance in “Middle East and North Africa” region.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" width="1152" /></p>
+</div>
+<div id="explore-the-distribution-of-dollar-amounts-of-foreign-assistance-in-countries-in-south-and-central-asia-as-well-as-middle-east-and-north-africa-region-in-recent-5-years-and-deep-dive-into-the-top-country" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Explore the distribution of dollar amounts of foreign assistance in countries in “South and Central Asia” as well as “Middle East and North Africa” region in recent 5 years and deep dive into the top country</h2>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-13-1.png" width="1152" /></p>
+<p>We want to examine the distribution of the dollar amounts of aids disbursed to the “South and Central Asia” and “Middle East and North Africa” region, since the debate revolving the US’s diplomatic relations and foreign policy outcomes in these regions are often at the center of the political discourse. We plot a boxplot plot to visualize and summarize the distribution of aids they received from 2016 to 2020. For clarity of presentation, we select data with <code>Constant.Dollar.Amounts</code> within in the range [$-5 million, $5 million] to exclude extreme outliers that interfere with the scale and shape of the boxplots. From the following plot, we find that Sri Lanka tops the dollar amounts of aids received, if we order by the median. It also has a much wider range between the first and third quantiles, while other countries such as Afghanistan and Pakistan demonstrate an overall much larger spread.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-14-1.png" width="1152" /></p>
+<p>We then decide to take a closer look at Afghanistan as to understand if the spread may be a result of changes in the political climate of the US and Afghanistan. Similarly, we use <code>year</code> as a proxy for those changes to plot a time series. As seen from Figure , aggregate dollar amounts of the assistance projects of Afghanistan underwent dramatic changes. From 2011 to 2012, the assistance increased over 200% but decreased nearly 80% by 2014. Then we saw a significant spike again in 2015 peaking at 2019 and a fall in 2020.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-15"></span>
+<img src="finalproj_files/figure-html/unnamed-chunk-15-1.png" alt="Trend of total constant dollar amounts of foreign assistance projects for Afghanistan" width="1152" />
+<p class="caption">
+Figure 5.4: Trend of total constant dollar amounts of foreign assistance projects for Afghanistan
+</p>
+</div>
+</div>
+<div id="what-is-the-distribution-of-international-category-and-to-explore-the-difference-in-income-group" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> What is the distribution of “international category” and to explore the difference in income group</h2>
+<p>Below we made a mosaic plot of “Transaction Type” and “Region, which is binned into 5 levels. You can see from the mosaic plot that there isn’t much of a relationship between transaction type and region name. It looks like no matter in which region, the proportion of transaction type are similar. Therefore, nothing conclusive can really be said about transaction type and region. If given more time, we would collect a wider range of samples and test this again.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-17"></span>
+<img src="finalproj_files/figure-html/unnamed-chunk-17-1.png" alt="Composition of transaction type of aids in each implementing category" width="1152" />
+<p class="caption">
+Figure 5.5: Composition of transaction type of aids in each implementing category
+</p>
+</div>
+<p>We care about the pattern of foreign assistance towards “international category”, then we rank the average of those categories in recent five years by using bar chart. And we find the top 3 categories are Health and Population, Governance and Humanitarian.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-18-1.png" width="1152" /></p>
+<p>Next, we are interested in the those categories in relation to the income group. Below is a bar graph of total assistance and the income group, faceted by International Category. It seems like the assistance are different in Low Income Country and Lower Middle Income Country towards Governance, Health and Population and Humanitarian categories. More specifically, the assistance for Health and Population and Humanitarian categories for Low Income Country is more than Lower Middle Income Country.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-19-1.png" width="1152" /></p>
+<p>“Health and Population” is the top 1 international category and it shows different distribution in Low Income Country and Lower Middle Income Country. Thus, we want to explore the rank of country for Health and Population category in two income groups. As you can see below, in Low Income Country, the top 3 countries are Tanzania, Uganda and Mozambique. Nigeria, Zambia and Kenya are top ranking countries in Lower Middle Income Country.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-20-1.png" width="1152" /></p>
+</div>
+<div id="did-covid-19-affect-the-patterns-of-different-types-of-aids" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Did COVID-19 affect the patterns of different types of aids?</h2>
+<p>The two charts below illustrate how the pandemic influence pattern of aid type and transaction type. We can see after the pandemic, Project-Type decreased a lot but other Aid Type only had minor changes. For Transaction Type, almost all types have decreased except for the rise of Obligation Type. Thus, we can conclude that COVID-19 did affect the pattern of aid type and transaction type, more specifically, it cause decrease of almost types.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-21-1.png" width="1152" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-22-1.png" width="1152" /></p>
 
+</div>
 </div>
             </section>
 
