@@ -157,6 +157,8 @@ else {
 plot_missing(us_foreign_aid_sample, percent = TRUE)
 ```
 
+```
 
+From the graph above, we decided that we discard all the columns `Activity.Start.Date` and `Activity.End.Date`. 
 
 
