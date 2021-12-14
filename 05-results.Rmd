@@ -21,10 +21,11 @@ library(choroplethrMaps)
 us_foreign_aid_sample <- read.csv("./data/final_data.csv")
 ```
 
-## Trend of changes in foreign assistance objective
-`Figure 5.1` plots the time series of aid programs with economic objectives versus military objectives from 2015 to 2020. We can clearly see that the scale of economic assistance is greater than military assistance for the entire time span in question, while the pattern of changes over time is different. The military assistance indicates a reasonably fluctuating trend and generally stays at the same level. In contrast, the economic assistance always shows a continual downward trend, most noted . Thus, we intend to explore the reason for the decrease change of economic assistance.
+## Trend of changes in economic assistance over time
 
-```{r, fig.cap="U.S foreign aids directed toward different objectives"}
+Figure 5.1 plots the time series of aid programs with economic objectives versus military objectives from 2015 to 2020. We can clearly see that the scale of economic assistance is greater than military assistance for the entire time span in question, while the pattern of changes over time is different. The military assistance indicates a reasonably fluctuating trend and generally stays at the same level. In contrast, the economic assistance always shows a continual downward trend, most noted by the sharp fall from 2015 to 2016. Thus, we intend to explore the reason for the considerable decrease of economic assistance.
+
+```{r, fig.cap="U.S foreign aids directed to different objectives"}
 data7 <- subset(us_foreign_aid_sample,year %in% 
                   seq(2015, 2020)) %>% group_by(year,Foreign.Assistance.Objective.Name) %>%
   summarize(Total = sum(Constant.Dollar.Amount)/10**9)
@@ -33,7 +34,7 @@ data7 <- subset(us_foreign_aid_sample,year %in%
 ggplot(data7,aes(x=year,y=Total, color=Foreign.Assistance.Objective.Name))+ 
   geom_line(size = 1.5) + 
   geom_point(size = 2.5) + xlim(c(2015, 2020)) + 
-  ggtitle("U.S foreign aids directed toward different objectives") + 
+  ggtitle("U.S foreign aids directed to different objectives") + 
   theme(axis.text.x = element_text(size=12),
         axis.text.y = element_text(size=12))+
   theme(legend.title=element_text(size=15), legend.text=element_text(size=12),
@@ -49,15 +50,15 @@ ggplot(data7,aes(x=year,y=Total, color=Foreign.Assistance.Objective.Name))+
        color = "Foreign Assistance Objective") + scale_color_colorblind()
 ```
 
-The trend of economic assistance in low income and lower-middle income countries is similar indicated by the following graph. Then, we want to deep dive into economic assistance towards different region.
+As in shown in Figure 5.2, we see that the shape of the time series of economic assistance towards low income countries closely resembles that of the aggregate economic assistance. As a result of the magnitude of the amounts of economic assistance toward low income economies, the trend of changes in economic assistance is largely driven by the amount of aids received by low income economies. Nevertheless, we do see a shrinking gap between the low income countries and the lower-middle income countries. Thus, this gives us an incentive want to dive deeper into examining economic assistance directed toward specific regions and countries. 
 
-```{r, fig.cap="U.S foreign aids directed towards different economies"}
-data7 <- subset(us_foreign_aid_sample,year %in% c(2016,2017,2018,2019,2020) & Foreign.Assistance.Objective.Name=="Economic") %>% group_by(year,Income.Group.Name) %>%
+```{r, fig.cap="U.S foreign aids directed to different economies"}
+data7 <- subset(us_foreign_aid_sample,year %in% c(2015, 2016,2017,2018,2019,2020) & Foreign.Assistance.Objective.Name=="Economic") %>% group_by(year,Income.Group.Name) %>%
   summarize(Total = sum(Constant.Dollar.Amount)/10**9)
 #data7
 #data1$year  = as.factor(data1$year )
 ggplot(data7,aes(x=year,y=Total, color=Income.Group.Name))+ geom_line(size=1.5) + geom_point(size=2.5) + 
-  ggtitle("U.S foreign aids directed towards different economies") + 
+  ggtitle("U.S foreign aids directed to different economies") + 
   theme(axis.text.x = element_text(size=12),
         axis.text.y = element_text(size=12))+
   theme(legend.title=element_text(size=15), legend.text=element_text(size=12),
@@ -73,35 +74,33 @@ ggplot(data7,aes(x=year,y=Total, color=Income.Group.Name))+ geom_line(size=1.5) 
        color = "Income Group")+ scale_color_colorblind()
 ```
 
-We are interested in “Sub-Saharan African” and “Middle East and North Africa” groups since the later has a fancy fluctuating trend between 2016 to 2020 and the former has a similar trend with economic assistance as of 2017, which may be the main reason to explain the downward trend. For other groups, the economic assistance does not change too much.
-
+Figure 5.3 plots the changes of economic assistance in countries that situate in different regions. The most noticeable ones on this figure are “Sub-Saharan African”, "South and Central Asia" and “Middle East and North Africa” as they received significantly more aids than other regions because of the presence of a higher number of low income and lower-middle income economies. Sub-Saharan Africa received the most aids consistently. South and Central Asia experienced a rapid decrease in the constant dollar amounts of aids in 2016 and Middle East and North Africa received a relatively significant rise in aids in 2017. For other regions, the trend of the total funding of economic assistance did not change too much.
 
 ```{r}
-d3data_economic <- subset(us_foreign_aid_sample, year%in%c(2015, 2016,2017,2018,2019,2020)&Foreign.Assistance.Objective.Name=="Economic") %>% group_by(Foreign.Assistance.Objective.Name, Region.Name, year) %>%
-  summarize(Total = sum(Constant.Dollar.Amount)) %>%
-  rename(Objective = Foreign.Assistance.Objective.Name,
-         Region_Name = Region.Name, 
-         Dollar_Sum = Total)
-
-d3data_military <- subset(us_foreign_aid_sample, year%in%c(2015, 2016,2017,2018,2019,2020)&Foreign.Assistance.Objective.Name=="Military") %>% group_by(Foreign.Assistance.Objective.Name, Region.Name, year) %>%
-  summarize(Total = sum(Constant.Dollar.Amount)) %>%
-  rename(Objective = Foreign.Assistance.Objective.Name,
-         Region_Name = Region.Name, 
-         Dollar_Sum = Total)
+# d3data_economic <- subset(us_foreign_aid_sample, year%in%c(2015, 2016,2017,2018,2019,2020)&Foreign.Assistance.Objective.Name=="Economic") %>% group_by(Foreign.Assistance.Objective.Name, Region.Name, year) %>%
+#   summarize(Total = sum(Constant.Dollar.Amount)) %>%
+#   rename(Objective = Foreign.Assistance.Objective.Name,
+#          Region_Name = Region.Name, 
+#          Dollar_Sum = Total)
+# 
+# d3data_military <- subset(us_foreign_aid_sample, year%in%c(2015, 2016,2017,2018,2019,2020)&Foreign.Assistance.Objective.Name=="Military") %>% group_by(Foreign.Assistance.Objective.Name, Region.Name, year) %>%
+#   summarize(Total = sum(Constant.Dollar.Amount)) %>%
+#   rename(Objective = Foreign.Assistance.Objective.Name,
+#          Region_Name = Region.Name, 
+#          Dollar_Sum = Total)
 
 # write.csv( d3data_economic, "./data/d3data_economic.csv")
 # write.csv(d3data_military, "./data/d3data_military.csv")
 ```
 
 
-
-```{r, fig.cap="U.S. economic assistance for different regions"}
+```{r, fig.cap="U.S. economic assistance in different regions"}
 data6 <- subset(us_foreign_aid_sample,year%in%c(2015, 2016,2017,2018,2019,2020)&Foreign.Assistance.Objective.Name=="Economic") %>%group_by(year,Region.Name) %>%
   summarize(Total = sum(Constant.Dollar.Amount)/10**6)
 #data6
 #data1$year  = as.factor(data1$year )
 ggplot(data6,aes(x=year,y=Total, color=Region.Name)) + 
-  geom_line(size=1.5) + geom_point(size=2.5) + ggtitle("U.S. economic assistance for different regions") + 
+  geom_line(size=1.5) + geom_point(size=2.5) + ggtitle("U.S. economic assistance in different regions") + 
   theme(axis.text.x = element_text(size=12),
         axis.text.y = element_text(size=12))+
   theme(legend.title=element_text(size=15), legend.text=element_text(size=12),
@@ -117,15 +116,15 @@ ggplot(data6,aes(x=year,y=Total, color=Region.Name)) +
   labs(x="Year", y="Total Constant Dollar Amount (Millions)", color = "Region")+ scale_color_colorblind()
 ```
 
-Now, we want to explore the trend of implementing partner category for economic assistance in “Sub-Saharan African” region. From the graph below, we can see the government category has decreased a lot as of 2017 but the change for other categories have minor changes, which is consistent with the change of economic assistance as of 2017 in “Middle East and North Africa”
+Then, we take a closer look at a breakdown of funds and activities implemented by partnering organizations with the U.S. in “Sub-Saharan African” region. According to Figure 5.4, we are able to see the changing dynamics of the role of different entities in collaborating with the U.S. to channel funds and provide aids to achieve economic goals. While governments continually reduced the total dollar amounts of economic assistance programs, enterprises rose to prominence at an increasing rate. It is now challenging NGOs and multilateral organizations such as the World Bank and United Nations that traditionally had a large share in the market.
 
-```{r }
+```{r, fig.cap="Deep dive into the decrease of economic assistance: Sub-Saharan Africa"}
 data1 <- subset(us_foreign_aid_sample,Region.Name=="Sub-Saharan Africa"
-                & year%in%c(2016,2017,2018,2019,2020) & Foreign.Assistance.Objective.Name=="Economic") %>%group_by(year,Implementing.Partner.Category.Name) %>%
+                & year%in%c(2015,2016,2017,2018,2019,2020) & Foreign.Assistance.Objective.Name=="Economic") %>%group_by(year,Implementing.Partner.Category.Name) %>%
   summarize(Total = sum(Constant.Dollar.Amount)/10**9)
 
 #data1$year  = as.factor(data1$year )
-ggplot(data1,aes(x=year,y=Total, color=Implementing.Partner.Category.Name))+geom_line(size=1.5) + geom_point(size=2.5) + ggtitle("Deep dive into economic assistance decrease: Sub-Saharan Africa") + 
+ggplot(data1,aes(x=year,y=Total, color=Implementing.Partner.Category.Name))+geom_line(size=1.5) + geom_point(size=2.5) + ggtitle("Deep dive into the decrease of economic assistance: Sub-Saharan Africa") + 
   theme(axis.text.x = element_text(size=12),
         axis.text.y = element_text(size=12))+
   theme(legend.title=element_text(size=15), legend.text=element_text(size=12),
@@ -138,30 +137,7 @@ ggplot(data1,aes(x=year,y=Total, color=Implementing.Partner.Category.Name))+geom
         )+labs(x="Year",y="Total Constant Dollar Amount (Billions)", color = "Implementing Partner \nCategory")+ scale_color_colorblind()
 ```
 
-The below figure is the trend of implementing partner category for economic assistance in “Middle East and North Africa” region. It shows that the government category is the dominant factor that affects the economic assistance. Similarly, the trend is consistent with the change of economic assistance in “Middle East and North Africa” region.
-
-```{r}
-data1.1 <- subset(us_foreign_aid_sample,Region.Name=="Middle East and North Africa"
-                & year%in%c(2016,2017,2018,2019,2020)& Foreign.Assistance.Objective.Name=="Economic") %>%group_by(year,Implementing.Partner.Category.Name) %>%
-  summarize(Total = sum(Constant.Dollar.Amount)/10**9)
-
-#data1$year  = as.factor(data1$year )
-ggplot(data1.1,aes(x=year,y=Total, color=Implementing.Partner.Category.Name)) + geom_line(size=1.5) + geom_point(size=2.5) + ggtitle(" Deep dive into economic assistance decrease: Middle East and North Africa") + 
-  theme(axis.text.x = element_text(size=12),
-        axis.text.y = element_text(size=12))+
-  theme(legend.title=element_text(size=15), legend.text=element_text(size=12),
-        axis.title.x=element_text( size=14,face = "bold"),
-        axis.title.y = element_text(size=14,face = "bold")
-        ,panel.grid.major=element_line(colour=NA),
-           panel.background = element_rect(fill = "transparent",colour = NA),
-           plot.background = element_rect(fill = "transparent",colour = NA),
-        plot.title =element_text(face='bold', color ="#0072B2", size = 22)
-        )+guides(shape = guide_legend(override.aes = list(size = 20)))+
-  labs(x="Year",y="Total Constant Dollar Amount (Billions)", color="Implementing Partner \nCategory")+ scale_color_colorblind()
-
-```
-
-##	Explore the distribution of dollar amounts of foreign assistance in countries in “South and Central Asia” as well as "Middle East and North Africa" region in recent 5 years and deep dive into the top country
+##	Distribution of dollar amounts of recent U.S. assistance in countries in “South and Central Asia” and "Middle East and North Africa" regions
 
 ```{r}
 # country_sum_2011 <- us_foreign_aid_sample %>% 
@@ -320,32 +296,15 @@ ggplot(data1.1,aes(x=year,y=Total, color=Implementing.Partner.Category.Name)) + 
 # choroplethr_animate(cc_list)
 ```
 
-```{r}
-country_sum <- us_foreign_aid_sample %>% 
-  group_by(Country.Name) %>%
-  summarise(value = round(sum(Constant.Dollar.Amount)/10**9, 2)) %>%
-  rename(region = Country.Name) %>%
-  mutate(region = tolower(region))
+To continue with the discussion, we then attempt to analyze the distribution of the dollar amounts of aids disbursed to countries in "South and Central Asia" and "Middle East and North Africa" regions, as the debate revolving the US's diplomatic relations and foreign policy outcomes in these regions are often at the center of the political discourse. We plot a boxplot plot in Figure 5.5 to summarize the distribution of aids they received from 2015 to 2020. For clarity of presentation, we select data with `Constant.Dollar.Amounts` within in the range [\$-5 million, \$5 million] to exclude extreme outliers that interfere with the scale and shape of the boxplots. We find that Sri Lanka tops the dollar amounts of aids received, if we order by the median. It also has a much wider range between the first and third quantiles, while other countries such as Afghanistan and Egypt demonstrate an overall much larger spread.
 
-country_choropleth(country_sum, num_colors = 8) +
-  labs(title = "World map of total dollar amounts of U.S. aids", 
-       fill = "Total Constant Dollar \nAmounts (Billions)") +
-  theme(legend.title=element_text(size=15), legend.text=element_text(size=12),
-         plot.title =element_text(face='bold', color ="#0072B2", size = 22))+
-  scale_fill_brewer(palette=3) 
-```
-
-
-We want to examine the distribution of the dollar amounts of aids disbursed to the "South and Central Asia" and "Middle East and North Africa" region, since the debate revolving the US's diplomatic relations and foreign policy outcomes in these regions are often at the center of the political discourse. We plot a boxplot plot to visualize and summarize the distribution of aids they received from 2016 to 2020. For clarity of presentation, we select data with `Constant.Dollar.Amounts` within in the range [\$-5 million, \$5 million] to exclude extreme outliers that interfere with the scale and shape of the boxplots. From the following plot, we find that Sri Lanka tops the dollar amounts of aids received, if we order by the median. It also has a much wider range between the first and third quantiles, while other countries such as Afghanistan and Pakistan demonstrate an overall much larger spread. 
-
-
-```{r}
+```{r, fig.cap="Distribution of dollar amounts of assistance for countries in South \nand Central Asia and Middle East and North Africa"}
 # us_foreign_aid_sample$Region.Name
 
 ME_CA_country_names <- c(unique(us_foreign_aid_sample[which(us_foreign_aid_sample$Region.Name == "Middle East and North Africa"), "Country.Name"]), unique(us_foreign_aid_sample[which(us_foreign_aid_sample$Region.Name == "South and Central Asia"), "Country.Name"]))
 
 # South and Central Asia
-data2 <-  subset(us_foreign_aid_sample,Country.Name %in% ME_CA_country_names &year%in%c(2016,2017,2018,2019,2020)) 
+data2 <-  subset(us_foreign_aid_sample,Country.Name %in% ME_CA_country_names) 
 
 data2 <- data2 %>%
   filter(Constant.Dollar.Amount < 5*10**6 & Constant.Dollar.Amount > -5*10**6) %>%
@@ -358,7 +317,7 @@ data2 <- data2 %>%
 
 ggplot(data2, aes(x = Constant.Dollar.Amount.M, y=reorder(Country.Name, Constant.Dollar.Amount.M, median))) + 
   geom_boxplot(fill = "#56B4E9")  + 
-  ggtitle("Boxplot of dollar amounts of assistance for countries in South \nand Central Asia and Middle East and North Africa") +
+  ggtitle("Distribution of dollar amounts of assistance for countries in South \nand Central Asia and Middle East and North Africa") +
 labs(x ="Total Constant Dollar Amount (Millions)", y ="Country")+
 theme_grey(10)+
   theme(axis.text.x = element_text(size=12),
@@ -374,7 +333,7 @@ theme_grey(10)+
         )
 ```
 
-We then decide to take a closer look at Afghanistan as to understand if the spread may be a result of changes in the political climate of the US and Afghanistan. Similarly, we use `year` as a proxy for those changes to plot a time series. As seen from Figure , aggregate dollar amounts of the assistance projects of Afghanistan underwent dramatic changes. From 2011 to 2012, the assistance increased over 200% but decreased nearly 80% by 2014. Then we saw a significant spike again in 2015 peaking at 2019 and a fall in 2020.
+We then decide to take a closer look at Afghanistan as to understand if the spread may be a result of changes in the political climate of the US and Afghanistan. Still, we use year on the x-axis as a proxy for those changes to plot a time series. As seen from Figure 5.6, aggregate dollar amounts of the assistance projects of Afghanistan underwent dramatic changes. From 2011 to 2012, the assistance increased over 200% but decreased nearly 80% by 2014. Then we saw a significant spike again in 2015 peaking at 2019 and a fall in 2020.
 
 ```{r, fig.cap="Trend of total constant dollar amounts of foreign assistance projects for Afghanistan"}
 data4<-subset(us_foreign_aid_sample,Country.Name=="Afghanistan"& year%in%c(2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020)) %>%
@@ -393,39 +352,12 @@ ggplot(data4,aes(x=year,y=Total,group = 1))+ geom_line(size = 1.5, aes(color = "
         plot.title =element_text(face='bold', color ="#0072B2", size = 22))
 ```
 
-##	What is the distribution of "international category" and to explore the difference in income group
+##	Distribution of different sectors of aids
 
-Below we made a mosaic plot of “Transaction Type” and “Region, which is binned into 5 levels. You can see from the mosaic plot that there isn’t much of a relationship between transaction type and region name. It looks like no matter in which region, the proportion of transaction type are similar. Therefore, nothing conclusive can really be said about transaction type and region. If given more time, we would collect a wider range of samples and test this again.
+We will first use Figure 5.7 that ranks the average dollar amounts of the aid activities to explore a general pattern of foreign assistance in different sectors. The top 3 categories are governance, health and population and humanitarian.
 
-```{r}
-mosaic_data <- us_foreign_aid_sample %>%
-  mutate(Region.shortened = case_when(
-    Region.Name == "East Asia and Oceania" ~ "E. Asia & Oceania",
-    Region.Name == "South and Central Asia" ~ "S. & Central Asia",
-    Region.Name == "Middle East and North Africa" ~ "Mid. East & N. Africa",
-    TRUE ~ Region.Name
-  ))
-```
-
-```{r, fig.cap="Composition of transaction type of aids in each implementing category"}
-ggplot(data = us_foreign_aid_sample) +
-  geom_mosaic(aes(x = product(International.Category.Name, Implementing.Partner.Category.Name), fill=International.Category.Name)) +
-  labs(title="Composition of transaction type of aids in each implementing category", fill = "Transaction Type") + 
-  theme(legend.title=element_text(size=12), legend.text=element_text(size=10),
-        axis.title.x = element_text(size=14, face ="bold"),
-        axis.title.y = element_text(size=14,face="bold"), 
-        axis.text.x = element_text(angle = 30, hjust = 0.5, size=8),
-        axis.text.y = element_text(size=10),
-        panel.grid.major=element_line(colour=NA),
-        panel.background = element_rect(fill = "transparent",colour = NA),
-        plot.background = element_rect(fill = "transparent",colour = NA),
-        plot.title =element_text(face='bold', color ="#0072B2", size = 22)) + scale_fill_colorblind()
-```
-
-We care about the pattern of foreign assistance towards "international category", then we rank the average of those categories in recent five years by using bar chart. And we find the top 3 categories are Health and Population, Governance and Humanitarian. 
-
-```{r}
-data6.1 <- subset(us_foreign_aid_sample, year%in%c(2016,2017,2018,2019,2020)) %>%group_by(year,International.Category.Name) %>%
+```{r, fig.cap="Average aid amounts by sector"}
+data6.1 <- us_foreign_aid_sample%>%group_by(year,International.Category.Name) %>%
   summarise(Total = sum(Constant.Dollar.Amount)) %>%
   filter(International.Category.Name !="Other") %>%
   group_by(International.Category.Name) %>%
@@ -434,7 +366,7 @@ data6.1 <- subset(us_foreign_aid_sample, year%in%c(2016,2017,2018,2019,2020)) %>
 ggplot(data6.1, aes(reorder(International.Category.Name,Average),Average
                                         )) + 
           geom_bar(stat = "identity", fill="#56B4E9") + 
-            ggtitle('Foreign assistance towards international category') +
+            ggtitle('Average aid amounts by sector') +
            labs(y="Average Constant Dollar Amount (Millions)" , x="International Category")  + 
           theme(panel.grid.major=element_line(colour=NA),
                 axis.title.x = element_text( size=14, face ="bold"),
@@ -446,10 +378,33 @@ ggplot(data6.1, aes(reorder(International.Category.Name,Average),Average
 
 ```
 
-Next, we are interested in the those categories in relation to the income group. Below is a bar graph of total assistance and the income group, faceted by International Category. It seems like the assistance are different in Low Income Country and Lower Middle Income Country towards Governance, Health and Population and Humanitarian categories. More specifically, the assistance for Health and Population and Humanitarian categories for Low Income Country is more than Lower Middle Income Country.
+Figure 5.8 plots different aid categories stacked on each other and divided by types of implementing partners of the aids. You can see from the mosaic plot that a strong relationship between the implementing partners and sectors of the aids can be inferred. We can see that some of the implementing partner agencies and organizations are similar to one another, while others are distinctively different. For example, church and faith based entities and multilateral organizations follow a similar distribution, with a relatively higher proportion of governance observed in multilateral organizations. A majority of aids implemented by enterprises are administrative costs. Multilateral organizations also support huge amounts of humanitarian aids. And both NGOs and universities/research institutes devote a lot to health and population. 
 
-```{r}
-data6 <- subset(us_foreign_aid_sample, year%in%c(2016,2017,2018,2019,2020)) %>%group_by(year,Income.Group.Name,International.Category.Name) %>%
+```{r, fig.cap="Composition of aid sector in each implementing partner"}
+
+mosaic_data <- us_foreign_aid_sample %>%
+  filter(Transaction.Type.Name != "Other")
+
+ggplot(data = mosaic_data) +
+  geom_mosaic(aes(x = product(International.Category.Name, Implementing.Partner.Category.Name), fill=International.Category.Name)) +
+  labs(title="Composition of aid sector in each implementing partner", x = "Implementing Partner Category", y = "Sector", fill = "Sector") + 
+  theme(legend.title=element_text(size=12), legend.text=element_text(size=10),
+        axis.title.x = element_text(size=14, face ="bold"),
+        axis.title.y = element_text(size=14,face="bold"), 
+        axis.text.x = element_text(angle = 30, hjust = 0.5, size=8),
+        axis.text.y = element_text(size=10),
+        panel.grid.major=element_line(colour=NA),
+        panel.background = element_rect(fill = "transparent",colour = NA),
+        plot.background = element_rect(fill = "transparent",colour = NA),
+        plot.title =element_text(face='bold', color ="#0072B2", size = 22)) + scale_fill_brewer(palette = "Set1")
+```
+
+Analyzing the association between a country's income level and the sector of the aids provided to them in recent years should produce useful findings as well. Figure 5.9 consists of bar graphs of total dollar amounts of the assistance programs and the income group of countries, faceted by the aid sector from 2015 to 2020. The amounts of assistance for the purpose of health and population, humanitarian and agriculture for low income countries are higher than lower-middle income countries, while amounts devoted to governance and economic growth are lower. This is a somewhat surprising result as we would expect more aids that seek to establish better governance and incentivize economic growth in the poorest countries. In fact, there is a school of economic thought that argues that aids do not contribute to promote economy but are counterproductive. Angus Deaton, a Nobel-winning economist, [claims](https://www.washingtonpost.com/news/wonk/wp/2015/10/13/why-trying-to-help-poor-countries-might-actually-hurt-them/) that the inflow of foreign aids would weaken the relationship between a country's government and its nationals by making it become less dependent on taxation and thus having less incentive to serve for the public. Corruption can easily arise as a result, which further depresses economic activities and undermines governance.
+
+```{r, fig.cap="Aid sector by income group from 2015 to 2020"}
+data6 <- us_foreign_aid_sample %>% 
+  filter(year > 2014 & year < 2021) %>% 
+  group_by(year, Income.Group.Name,International.Category.Name) %>%
   mutate(Total = sum(Constant.Dollar.Amount)) %>%
   filter(International.Category.Name !="Other")%>%
 group_by(International.Category.Name,Income.Group.Name)%>%
@@ -468,14 +423,14 @@ ggplot(data6, aes(x=Income.Group.Name, y=Average)) +
         plot.background = element_rect(fill = "transparent",colour = NA)
         )+
   labs(x='Income Group',y="Total Constant Dollar Amount (Millions)" ,
-       title='International category towards income group')
+       title='Aid sector by income group from 2015 to 2020')
 ```
 
-"Health and Population" is the top 1 international category and it shows different distribution in Low Income Country and Lower Middle Income Country. Thus, we want to explore the rank of country for Health and Population category in two income groups. As you can see below, in Low Income Country, the top 3 countries are Tanzania, Uganda and Mozambique. Nigeria, Zambia and Kenya are top ranking countries in Lower Middle Income Country. 
+Going back to Figure 5.7, we can notice that governance ranks the highest average amounts of U.S. assistance projects and from Figure 5.9, we can observe differences in aids for governance in low income countries and lower-middle income countries. Thus, we want to explore the rank of country in terms of the governance category in the two income groups of interest. As shown in Figure 5.10, remarkably, Afghanistan was the most dominant country that received aids from the U.S. to address the issue of governance in the low income. Aids directed to Egypt and Pakistan are also worthy of attention.
 
-```{r}
+```{r, fig.cap="Top 12 countries that received aids for governance by income group"}
 library(gridExtra)
-data10<-subset(us_foreign_aid_sample,Income.Group.Name=="Low Income Country"&International.Category.Name=="Health and Population"&year%in%c(2016,2017,2018,2019,2020))%>% 
+data10<-subset(us_foreign_aid_sample,Income.Group.Name=="Low Income Country"&International.Category.Name=="Governance")%>% 
   group_by(year,Country.Name)%>%
   summarise(Total=sum(Constant.Dollar.Amount))%>%
   group_by(Country.Name)%>%
@@ -486,9 +441,9 @@ data10<-subset(us_foreign_aid_sample,Income.Group.Name=="Low Income Country"&Int
 adiv1 <-ggplot(data10, aes(x=fct_reorder(Country.Name, Average), 
                                         y = Average)) +
           geom_bar(stat = "identity",fill="#56B4E9") +
-            ylab("Average Constant Dollar Amount \nfrom 2016 to 2020 (Millions)") + xlab("") +
-              ggtitle('Top 12 Low Income Country') +
-  theme(plot.title =element_text(face='bold', color ="#0072B2", size = 19),
+            ylab("Average Constant Dollar Amount \nfrom 2015 to 2020 (Millions)") + xlab("") +
+              ggtitle('Top 12 low income countries \n that received aids for governance') +
+  theme(plot.title =element_text(face='bold', color ="#0072B2", size = 17),
         panel.grid.major=element_line(colour=NA), 
         axis.title.x = element_text(size=14, face ="bold"),
         axis.title.y = element_text(size=14,face="bold"),
@@ -496,7 +451,7 @@ adiv1 <-ggplot(data10, aes(x=fct_reorder(Country.Name, Average),
         plot.background = element_rect(fill = "transparent",colour = NA))+
               coord_flip()
 
-data10.1<-subset(us_foreign_aid_sample,Income.Group.Name=="Lower Middle Income Country"&International.Category.Name=="Health and Population"&year%in%c(2016,2017,2018,2019,2020))%>% 
+data10.1<-subset(us_foreign_aid_sample,Income.Group.Name=="Lower Middle Income Country"&International.Category.Name=="Governance")%>% 
   group_by(year,Country.Name)%>%
   summarise(Total=sum(Constant.Dollar.Amount))%>%
   group_by(Country.Name)%>%
@@ -506,14 +461,14 @@ data10.1<-subset(us_foreign_aid_sample,Income.Group.Name=="Lower Middle Income C
   adiv2 <- ggplot(data10.1, aes(x=fct_reorder(Country.Name, Average), 
                                         y = Average)) +
           geom_bar(stat = "identity",fill="#56B4E9") +
-            ylab("Average Constant Dollar Amount \nfrom 2016 to 2020 (Millions)") + xlab("") +
-              ggtitle('Top 12 Lower Middle Income Country ') +
+            ylab("Average Constant Dollar Amount \nfrom 2015 to 2020 (Millions)") + xlab("") + 
+              ggtitle('Top 12 lower-middle income countries \n that received aids for governance') +
     theme(panel.grid.major=element_line(colour=NA), 
           axis.title.x = element_text( size=14, face ="bold"),
           axis.title.y = element_text(size=14,face="bold"),
           panel.background = element_rect(fill = "transparent",colour = NA),
           plot.background = element_rect(fill = "transparent",colour = NA),
-          plot.title =element_text(face='bold', color ="#0072B2", size = 19))+
+          plot.title =element_text(face='bold', color ="#0072B2", size = 17))+
               coord_flip()
 
 grid.arrange(adiv1, adiv2, nrow =1 , ncol = 2)
@@ -521,9 +476,9 @@ grid.arrange(adiv1, adiv2, nrow =1 , ncol = 2)
 
 ##	Did COVID-19 affect the patterns of different types of aids?
 
-The two charts below illustrate how the pandemic influence pattern of aid type and transaction type. We can see after the pandemic, Project-Type decreased a lot but other Aid Type only had minor changes. For Transaction Type, almost all types have decreased except for the rise of Obligation Type. Thus, we can conclude that COVID-19 did affect the pattern of aid type and transaction type, more specifically, it cause decrease of almost types. 
+Figure 5.11 and Figure 5.12 illustrate how the pandemic influenced the pattern of aid type and transaction type. We can see after the pandemic, project-type interventions, core contributions and technical assistance all fell by much. This should be due to the increased restrictions on oversea travel and global decline in economic production. For transaction type, almost all types have decreased except for obligation, which include binding agreements, contracts, administrative costs. This may be a sign of more countries seeking to reach agreements with the U.S. government to ask for aids due to the adverse effects of COVID-19 on their national economies. Thus, we can conclude that COVID-19 did affect the distribution of aids of different types and suggested the escalation of unmet demands.
 
-```{r}
+```{r, fig.cap= "Dollar amounts of assistance projects by aid type group before and after COVID-19"}
 data5.1 <- subset(us_foreign_aid_sample, year%in%c(2019,2020)) %>%group_by(year,Aid.Type.Group.Name)%>%
   summarise(Total=sum(Constant.Dollar.Amount)/10**9)
 
@@ -539,11 +494,11 @@ ggplot(data5.1,aes(x=Aid.Type.Group.Name,y=Total)) + geom_col(aes(fill=factor(ye
            plot.background = element_rect(fill = "transparent",colour = NA)
         )+
   labs(x='Aid Type', y="Total Constant Dollar Amount (Billions)" ,
-       title='Dollar amounts of assistance projects by \naid type group before and after COVID-19', fill="Year") + scale_fill_colorblind()
+       title='Dollar amounts of assistance projects by aid type group \n before and after COVID-19', fill="Year") + scale_fill_colorblind()
 ```
 
 
-```{r}
+```{r, fig.cap="'Dollar amounts of assistance projects by transaction type before and after COVID-19"}
 data5 <- subset(us_foreign_aid_sample, year%in%c(2019,2020)) %>%group_by(year,Transaction.Type.Name)%>%
   summarise(Total=sum(Constant.Dollar.Amount)/10**9) %>%
   filter(Transaction.Type.Name != "Initial Allocations")
@@ -560,7 +515,7 @@ ggplot(data5,aes(x=Transaction.Type.Name,y=Total)) + geom_col(aes(fill=factor(ye
            plot.background = element_rect(fill = "transparent",colour = NA)
         )+ scale_fill_colorblind() + 
   labs(x=' Transaction Type',y="Total Constant Dollar Amount (Billions)" ,
-       title='Dollar amounts of assistance projects \nby transaction type before and after COVID-19', fill="Year")
+       title='Dollar amounts of assistance projects by transaction type \n before and after COVID-19', fill="Year")
 
 ```
 

@@ -1,7 +1,7 @@
 --- 
 title: "Visualizing US Foreign Assistance Projects"
 author: "Tianmai Jiao, Yao Xiao"
-date: "`r Sys.Date()`"
+date: "2021-12-13"
 site: bookdown::bookdown_site
 ---
 
@@ -11,14 +11,12 @@ We are living in an era of rapid socio-economic and political changes, most note
 
 • What categories did the US aids consistently devote the most resources to?
 
-• What countries were the biggest beneficiaries of the US foreign assistance?
+• What countries were big beneficiaries of the US foreign assistance?
 
-• Did the recent growth and development of the private sector investments, NGOs, and other new sectors impact the role of the bilateral and multilateral organizations (e.g. USAID, World Bank, etc.) in providing aids?
-
-• Are there noticeable relationships between the fields?
+• Did the recent growth and development of the private sector investments and other new sectors impact the role of the NGOs' and bilateral and multilateral organizations (e.g. USAID, World Bank, etc.) in providing aids?
 
 • Did the overall time frame of the programs change? What is the trend of changes in foreign assistance objective?
 
-• Are there noticeable relationships between the fields, such as transaction type and region?
+• Are there noticeable relationships between the fields, such as aid for some specific goals (e.g. improving public health and human rights) and entities that carry out the process of distributing and directing these aids?
 
-• How did the major economic shocks (e.g. subprime mortgage crisis in 2008 and the current pandemic of COVID-19) affect the pattern of the US foreign aids provided to the developing countries?
+• How did the major economic shocks (e.g. the current pandemic of COVID-19) affect the pattern of the US foreign aids provided to the developing countries?

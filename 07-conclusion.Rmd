@@ -1,2 +1,30 @@
 # Conclusion
 
+To conclude our discussion and analysis of U.S foreign assistance, we hereby highlight the following key findings: 
+
+(1) U.S. economic assistance to the developing economies exhibits a continual downward trend over time, largely driven by the reduction in funds disbursed to the low income countries.
+
+(2) Out of all geographical regions in the world, Sub-Saharan Africa consistently received the most aids with economic objective.
+
+(3) Even though governments are still the most dominant and engaged in assistance activities, we can see an accelerating growth of private sectors in participating these activities as well, which may outrun NGOs and multilateral organizations very soon.
+
+(4) Countries that suffer political and economic instability are typically characterized by dramatic fluctuations of U.S. aids received over time. A significant portion of these aids are for the purpose of governance.
+
+(5) The relationship between the implementing partners and sectors of the aids is strong. Each of different implementing entities has distinct focus and priorities when participating in assistance projects.
+
+(6) COVID-19 did affect the distribution of aids of different types and suggested the escalation of unmet demands.
+
+However, there are still some limitations we failed to address adequately. One limitation is that we did not consider the politics, financing and economics of U.S federal budget plan, since the foreign assistance programs and projects are disbursed using federal budget. The fall in foreign assistance since 2015 may be explained by policy changes promoted by the Trump Administration or by a tighter federal budget due to external economic shocks.
+
+Thus, if we are given with more time, we would collect more data to conduct an in-depth analysis of the policy outcomes of the Trump Administration and the U.S federal fiscal plan. Incorporating them into our research should be helpful to account for the trend of changes in foreign assistance. 
+
+Still, by performing a hands-on exploratory data analysis using a real world dataset and engaging in this projected-based learning opportunity, we have gained an deeper understanding of the following aspects: 
+
+(1) Key principles and best practices of data visualization
+
+(2) Effective team communication to develop a reproducible and collaborative       workflow
+
+(3) Formulation and validation of research hypotheses by engaing with data
+
+(4) Development of clear, professional and stylized online deliverables 
+

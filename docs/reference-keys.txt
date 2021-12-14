@@ -45,3 +45,9 @@ would-covid-19-affect-the-patterns-of-different-types-of-aids
 trend-of-changes-in-foreign-assistance-objective-and-deep-dive-into-the-change
 did-covid-19-affect-the-patterns-of-different-types-of-aids
 trend-of-changes-in-foreign-assistance-objective
+trend-of-changes-in-economic-assistance-over-time
+fig:unnamed-chunk-12
+distribution-of-dollar-amounts-of-recent-u.s.-assistance-in-countries-in-south-and-central-asia-and-middle-east-and-north-africa-regions-in
+distribution-of-dollar-amounts-of-recent-u.s.-assistance-in-countries-in-south-and-central-asia-and-middle-east-and-north-africa-regions
+distribution-of-different-aid-categories
+distribution-of-different-sectors-of-aids
