@@ -1,3 +1,5 @@
 # Interactive component
 
 <iframe src="interactive.html" width="620" height="520"></iframe>
+
+As our project focuses primarily on U.S. economic aids, we now provide an interactive graph that shows another aspect of the story to supplement the analysis and invite you to uncover the pattern of the trend of military aids. This is an interactive line chart that plots the time series of total dollar value of assistance projects and activities implemented from 2015 to 2020 in different geographical regions, each of which is represented as distinct colored lines. Adding to what is already plotting in Figure 5.1, you can click the button above the chart to see how the trend changes when filtering aids implemented with a specified objective (i.e. economic vs. military). Do you see anything interesting when comparing economic aids and military aids? Can you think of some real world events that can offer potential explanations of the fluctuations in these two graphs?
