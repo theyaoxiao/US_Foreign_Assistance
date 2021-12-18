@@ -4,8 +4,6 @@
 knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
 ```
 
-Describe the process of getting the data into a form in which you could work with it in R. If your code does not lend itself to being including in the .Rmd  file, provide a link to the folder or file(s) that contain(s) that code.
-
 As described in [Chapter 2](https://theyaoxiao.github.io/US_Foreign_Assistance/data-sources.html), we need to perform a series of steps to transform the data for use. 
 
 ## Drop Redundant Variables
